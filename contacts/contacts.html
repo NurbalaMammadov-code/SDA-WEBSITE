@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDA - Professional Navigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/contactstyle.css">
+</head>
+<body>
+
+     <nav class="navbar">
+        <div class="nav-container">
+            <div class="ellipse ellipse-right"></div>
+            <div class="ellipse ellipse-left"></div>
+            <a href="#" class="logo"> 
+                <img src="/assets/images/SDA 1.png" alt="SDA Logo">
+            </a>
+
+            <ul class="nav-center">
+                <li class="nav-item">
+                    <a href="/about/about.html" class="nav-link">About us</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleDropdown('services')">
+                        Services
+                        <svg class="dropdown-arrow" id="services-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="services-dropdown">
+                       <a href="/Services/services.html" class="dropdown-item">Property development consulting</a>
+                        <a href="/services inner page/servicesinner.html" class="dropdown-item">Property leasing & sales</a>
+                        <a href="/Services/services.html" class="dropdown-item">Market research & analytics</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/project bolumu/project/index.html" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleDropdown('property')">
+                        Properties
+                        <svg class="dropdown-arrow" id="property-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="property-dropdown">
+                         <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Shopping malls</a>
+                        <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Residential buildings</a>
+                        <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Commercial buildings</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/news page/news.html" class="nav-link">News</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="language-dropdown">
+                    <button class="language-btn" onclick="toggleDropdown('language')">
+                        <span id="selected-language">EN</span>
+                        <svg class="dropdown-arrow" id="language-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="language-dropdown">
+                        <a href="#" class="dropdown-item" onclick="setLanguage('AZ')">AZ</a>
+                        <a href="#" class="dropdown-item" onclick="setLanguage('RU')">RU</a>
+                    </div>
+                </div>
+                <a href="/contacts/contacts.html"><button class="contact-btn">Contact Us</button></a>
+            </div>
+
+            <div class="mobile-controls">
+                <div class="language-dropdown">
+                    <button class="mobile-language-btn" onclick="toggleDropdown('mobile-language')">
+                        <span id="mobile-selected-language">EN</span>
+                        <svg class="dropdown-arrow" id="mobile-language-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="mobile-language-dropdown">
+                        <a href="#" class="dropdown-item" onclick="setMobileLanguage('AZ')">AZ</a>
+                        <a href="#" class="dropdown-item" onclick="setMobileLanguage('RU')">RU</a>
+                    </div>
+                </div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <svg class="hamburger-icon" id="hamburger-icon" viewBox="0 0 24 24">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-content">
+                <div class="mobile-nav-item">
+                    <a href="/about/about.html" class="mobile-nav-link">About us</a>
+                </div>
+                <div class="mobile-nav-item">
+                    <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('mobile-services')">
+                        Services
+                        <svg class="dropdown-arrow" id="mobile-services-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown-content" id="mobile-services-dropdown">
+                         <a href="/Services/services.html" class="mobile-dropdown-item">Property development consulting</a>
+                        <a href="/services inner page/servicesinner.html" class="mobile-dropdown-item">Property leasing & sales</a>
+                        <a href="/Services/services.html" class="mobile-dropdown-item">Market research & analytics</a>
+                    </div>
+                </div>
+                <div class="mobile-nav-item">
+                    <a href="/projects/projects.html" class="mobile-nav-link">Projects</a>
+                </div>
+                <div class="mobile-nav-item">
+                    <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('mobile-property')">
+                        Properties
+                        <svg class="dropdown-arrow" id="mobile-property-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown-content" id="mobile-property-dropdown">
+                       <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Shopping malls</a>
+                        <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Residential buildings</a>
+                        <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Commercial buildings</a>
+                    </div>
+                </div>
+                <div class="mobile-nav-item">
+                    <a href="/news/news.html" class="mobile-nav-link">News</a>
+                </div>
+                 <div class="mobile-nav-item">
+                    <button class="contact-btn" onclick="window.location.href='/contacts/contacts.html'">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </nav>    
+
+
+
+    <!-- contacts -->
+    <div class="contact-container">
+        <div class="contact-left">
+            <h1>Let's turn your <span class="highlight">ideas</span><br>into strategic <span class="highlight">action</span></h1>
+            
+            <div class="contact-info">
+                <div class="info-item">
+                    <label>Email</label>
+                    <p>office@sdaconsulting.az</p>
+                </div>
+                <div class="info-item">
+                    <label>Phone</label>
+                    <p>+994 51 244 53 53</p>
+                </div>
+                <div class="info-item">
+                    <label>Address</label>
+                    <p>Üzeyir Hajibeyov 62, Marina Plaza,<br>Bakü, Azerbaijan</p>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+<path d="M10.0179 5.875C7.73214 5.875 5.91071 7.73214 5.91071 9.98214C5.91071 12.2679 7.73214 14.0893 10.0179 14.0893C12.2679 14.0893 14.125 12.2679 14.125 9.98214C14.125 7.73214 12.2679 5.875 10.0179 5.875ZM10.0179 12.6607C8.55357 12.6607 7.33929 11.4821 7.33929 9.98214C7.33929 8.51786 8.51786 7.33929 10.0179 7.33929C11.4821 7.33929 12.6607 8.51786 12.6607 9.98214C12.6607 11.4821 11.4821 12.6607 10.0179 12.6607ZM15.2321 5.73214C15.2321 6.26786 14.8036 6.69643 14.2679 6.69643C13.7321 6.69643 13.3036 6.26786 13.3036 5.73214C13.3036 5.19643 13.7321 4.76786 14.2679 4.76786C14.8036 4.76786 15.2321 5.19643 15.2321 5.73214ZM17.9464 6.69643C17.875 5.41071 17.5893 4.26786 16.6607 3.33929C15.7321 2.41071 14.5893 2.125 13.3036 2.05357C11.9821 1.98214 8.01786 1.98214 6.69643 2.05357C5.41071 2.125 4.30357 2.41071 3.33929 3.33929C2.41071 4.26786 2.125 5.41071 2.05357 6.69643C1.98214 8.01786 1.98214 11.9821 2.05357 13.3036C2.125 14.5893 2.41071 15.6964 3.33929 16.6607C4.30357 17.5893 5.41071 17.875 6.69643 17.9464C8.01786 18.0179 11.9821 18.0179 13.3036 17.9464C14.5893 17.875 15.7321 17.5893 16.6607 16.6607C17.5893 15.6964 17.875 14.5893 17.9464 13.3036C18.0179 11.9821 18.0179 8.01786 17.9464 6.69643ZM16.2321 14.6964C15.9821 15.4107 15.4107 15.9464 14.7321 16.2321C13.6607 16.6607 11.1607 16.5536 10.0179 16.5536C8.83929 16.5536 6.33929 16.6607 5.30357 16.2321C4.58929 15.9464 4.05357 15.4107 3.76786 14.6964C3.33929 13.6607 3.44643 11.1607 3.44643 9.98214C3.44643 8.83929 3.33929 6.33929 3.76786 5.26786C4.05357 4.58929 4.58929 4.05357 5.30357 3.76786C6.33929 3.33929 8.83929 3.44643 10.0179 3.44643C11.1607 3.44643 13.6607 3.33929 14.7321 3.76786C15.4107 4.01786 15.9464 4.58929 16.2321 5.26786C16.6607 6.33929 16.5536 8.83929 16.5536 9.98214C16.5536 11.1607 16.6607 13.6607 16.2321 14.6964Z" fill="#003B3E"/>
+</svg>
+                </a>
+                <a href="#" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+<path d="M18.0485 10.0487C18.0485 5.60243 14.4461 2 9.99985 2C5.55361 2 1.95117 5.60243 1.95117 10.0487C1.95117 14.073 4.87206 17.4158 8.73413 18V12.3854H6.68951V10.0487H8.73413V8.29615C8.73413 6.28398 9.93494 5.14807 11.7524 5.14807C12.6611 5.14807 13.5698 5.31034 13.5698 5.31034V7.29006H12.5637C11.5577 7.29006 11.2331 7.90669 11.2331 8.55578V10.0487H13.4725L13.1155 12.3854H11.2331V18C15.0952 17.4158 18.0485 14.073 18.0485 10.0487Z" fill="#003B3E"/>
+</svg>
+                </a>
+                <a href="#" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+<path d="M6.56611 18H3.24055V7.30812H6.56611V18ZM4.88545 5.87777C3.84845 5.87777 2.99023 4.9838 2.99023 3.91103C2.99023 2.44492 4.56362 1.51519 5.85094 2.26613C6.45884 2.58796 6.81643 3.23162 6.81643 3.91103C6.81643 4.9838 5.95822 5.87777 4.88545 5.87777ZM18.9744 18H15.6846V12.815C15.6846 11.5634 15.6489 9.99003 13.9324 9.99003C12.216 9.99003 11.9657 11.3131 11.9657 12.7077V18H8.64013V7.30812H11.8227V8.77423H11.8584C12.3233 7.95178 13.396 7.05781 15.0052 7.05781C18.3665 7.05781 19.0102 9.27485 19.0102 12.1356V18H18.9744Z" fill="#003B3E"/>
+</svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-right">
+            <form id="contact-form" class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="" required>
+                        <label for="name" class="floating-label">Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="company" name="company" placeholder="">
+                        <label for="company" class="floating-label">Company</label>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="" required>
+                        <label for="phone" class="floating-label">Phone number</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="" required>
+                         <label for="email" class="floating-label">Email Address</label>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="country" name="country" placeholder="" required>
+                        <label for="country" class="floating-label">Country</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="property-type" name="property-type"  class="property-dropdown" required>
+                            <option value="">Property type</option>
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="industrial">Industrial</option>
+                            <option value="land">Land</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agree" name="agree" required>
+                        <span class="checkmark">I agree that SDA may save and use my contact details to respond to my request via email or phone. I have read and accept SDA <a href="/privacy policy/privacy.html" class="terms-link">Terms of Use</a> and <a href="/privacy policy/privacy.html" class="terms-link">Privacy Policy</a>
+                        </span>
+
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <h3>Thank you! Your submission has been received and we will get back to you in the shortest amount of time!</h3>
+            <button type="button" class="done-btn" id="done-btn">Done</button>
+        </div>
+    </div>
+
+
+   <!-- Footer -->
+  <footer class="footer">
+        <div class="container9">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/assets/images/SDAlogo.png" alt="SDA Logo" class="logo-image">
+                    </div>
+                    <div class="social-links2">
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                         <path d="M17.3174 10.9077C17.3174 6.62646 13.8486 3.15771 9.56738 3.15771C5.28613 3.15771 1.81738 6.62646 1.81738 10.9077C1.81738 14.7827 4.62988 18.0015 8.34863 18.564V13.1577H6.37988V10.9077H8.34863V9.22021C8.34863 7.28271 9.50488 6.18896 11.2549 6.18896C12.1299 6.18896 13.0049 6.34521 13.0049 6.34521V8.25146H12.0361C11.0674 8.25146 10.7549 8.84521 10.7549 9.47021V10.9077H12.9111L12.5674 13.1577H10.7549V18.564C14.4736 18.0015 17.3174 14.7827 17.3174 10.9077Z" fill="#F3FBFC"/>
+                        </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                           <path d="M5.69202 16.8155H2.78577V7.47171H5.69202V16.8155ZM4.22327 6.22171C3.31702 6.22171 2.56702 5.44046 2.56702 4.50296C2.56702 3.22171 3.94202 2.40921 5.06702 3.06546C5.59827 3.34671 5.91077 3.90921 5.91077 4.50296C5.91077 5.44046 5.16077 6.22171 4.22327 6.22171ZM16.5358 16.8155H13.6608V12.2842C13.6608 11.1905 13.6295 9.81546 12.1295 9.81546C10.6295 9.81546 10.4108 10.9717 10.4108 12.1905V16.8155H7.50452V7.47171H10.2858V8.75296H10.317C10.7233 8.03421 11.6608 7.25296 13.067 7.25296C16.0045 7.25296 16.567 9.19046 16.567 11.6905V16.8155H16.5358Z" fill="#F3FBFC"/>
+                           </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column1">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="/about/about.html">About us</a></li>
+                            <li><a href="/join our team/joinour.html">Career</a></li>
+                            <li><a href="/news page/news.html">Blog</a></li>
+                            <li><a href="/contacts/contacts.html">Contacts</a></li>
+                            <li><a href="/privacy policy/privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Property types</h4>
+                        <ul>
+                            <li><a href="/property inner pagek/sectorinner.html">Shopping malls</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Residential buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Multifunctional buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Retail & Commercial buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Office buildings</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="/Services/services.html">Property development consulting</a></li>
+                            <li><a href="/Services/services.html">Property leasing & sales</a></li>
+                            <li><a href="/services inner page/servicesinner.html">Market research & analytics</a></li>
+                            <li><a href="/services inner page/servicesinner.html">Property marketing strategy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>©2025 All rights reserved.</p>
+                <p>Created by <a href="https://myteam.az" target="_blank" rel="noopener noreferrer">My Team</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/contractsc.js"></script>
+    </body>
+    </html>

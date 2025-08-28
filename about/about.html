@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDA - Professional Navigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/about.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="ellipse ellipse-right"></div>
+            <a href="#" class="logo"> 
+                <img src="/assets/images/SDA 1.png" alt="SDA Logo">
+            </a>
+
+            <ul class="nav-center">
+                <li class="nav-item">
+                    <a href="/about/about.html" class="nav-link">About us</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleDropdown('services')">
+                        Services
+                        <svg class="dropdown-arrow" id="services-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="services-dropdown">
+                       <a href="/Services/services.html" class="dropdown-item">Property development consulting</a>
+                        <a href="/services inner page/servicesinner.html" class="dropdown-item">Property leasing & sales</a>
+                        <a href="/Services/services.html" class="dropdown-item">Market research & analytics</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/project bolumu/project/index.html" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleDropdown('property')">
+                        Properties
+                        <svg class="dropdown-arrow" id="property-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="property-dropdown">
+                         <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Shopping malls</a>
+                        <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Residential buildings</a>
+                        <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Commercial buildings</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/news page/news.html" class="nav-link">News</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="language-dropdown">
+                    <button class="language-btn" onclick="toggleDropdown('language')">
+                        <span id="selected-language">EN</span>
+                        <svg class="dropdown-arrow" id="language-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="language-dropdown">
+                        <a href="#" class="dropdown-item" onclick="setLanguage('AZ')">AZ</a>
+                        <a href="#" class="dropdown-item" onclick="setLanguage('RU')">RU</a>
+                    </div>
+                </div>
+                <a href="/contacts/contacts.html"><button class="contact-btn">Contact Us</button></a>
+            </div>
+
+            <div class="mobile-controls">
+                <div class="language-dropdown">
+                    <button class="mobile-language-btn" onclick="toggleDropdown('mobile-language')">
+                        <span id="mobile-selected-language">EN</span>
+                        <svg class="dropdown-arrow" id="mobile-language-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="mobile-language-dropdown">
+                        <a href="#" class="dropdown-item" onclick="setMobileLanguage('AZ')">AZ</a>
+                        <a href="#" class="dropdown-item" onclick="setMobileLanguage('RU')">RU</a>
+                    </div>
+                </div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <svg class="hamburger-icon" id="hamburger-icon" viewBox="0 0 24 24">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-content">
+                <div class="mobile-nav-item">
+                    <a href="/about/about.html" class="mobile-nav-link">About us</a>
+                </div>
+                <div class="mobile-nav-item">
+                    <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('mobile-services')">
+                        Services
+                        <svg class="dropdown-arrow" id="mobile-services-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown-content" id="mobile-services-dropdown">
+                         <a href="/Services/services.html" class="mobile-dropdown-item">Property development consulting</a>
+                        <a href="/services inner page/servicesinner.html" class="mobile-dropdown-item">Property leasing & sales</a>
+                        <a href="/Services/services.html" class="mobile-dropdown-item">Market research & analytics</a>
+                    </div>
+                </div>
+                <div class="mobile-nav-item">
+                    <a href="/projects/projects.html" class="mobile-nav-link">Projects</a>
+                </div>
+                <div class="mobile-nav-item">
+                    <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('mobile-property')">
+                        Properties
+                        <svg class="dropdown-arrow" id="mobile-property-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown-content" id="mobile-property-dropdown">
+                       <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Shopping malls</a>
+                        <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Residential buildings</a>
+                        <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Commercial buildings</a>
+                    </div>
+                </div>
+                <div class="mobile-nav-item">
+                    <a href="/news/news.html" class="mobile-nav-link">News</a>
+                </div>
+                 <div class="mobile-nav-item">
+                    <button class="contact-btn" onclick="window.location.href='/contacts/contacts.html'">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+<!-- Main Content -->
+     <div class="container">
+        <div class="content1">
+            <p class="intro-text">
+                We are honored to introduce ourselves and <br> share our 
+                <span class="highlight5">experience</span>, 
+                <span class="highlight5">knowledge</span>, and 
+                <span class="highlight5">passion</span><br> 
+                for collaborating on your project.
+            </p>
+            <div class="image-container">
+                <img src="/assets/images/image 6.png" alt="Modern Architecture Building" class="main-image">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Strategy Section -->
+     <section class="strategy-section">
+        <div class="strategy-pill">
+            <div class="insights-badge1"><span class="noqte"> ● </span> Our strategy </div>
+        </div>
+        
+        <div class="strategy-content">
+            <h1 class="strategy-title">
+                Your goals drive <span class="highlight1">our strategy</span> — built for resilience, relevance, and measurable<br> <span class="highlight1">long-term success.</span>
+            </h1>
+            
+            <p class="strategy-description">
+                We excel in crafting tailored strategies that address the unique needs of each client, delivering actionable plans to achieve long-term success. Our commitment lies in ensuring every project remains relevant and valuable not only today but also for the next 5-10 years, driving sustainable growth and profitability.
+            </p>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">years experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">ongoing projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">32</div>
+                    <div class="stat-label">members</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+     <!-- Partners in innovation section -->
+    <section class="partners-section">
+        <div class="partners-container">
+            <div class="partners-header">
+                <h2>Partners in innovation</h2>
+                <a href="/news page/news.html" class="become-partner-link">Become our partner</a>
+            </div>
+            <div class="partners-logos">
+                <img src="/assets/images/image 15.png" alt="Partner 1" class="partner-logo">
+                <img src="/assets/images/image 14.png" alt="Partner 2" class="partner-logo">
+                <img src="/assets/images/image 16.png" alt="Partner 3" class="partner-logo">
+                <img src="/assets/images/image 15.png" alt="Partner 4" class="partner-logo">
+                <img src="/assets/images/image 14.png" alt="Partner 5" class="partner-logo">
+                <img src="/assets/images/image 16.png" alt="Partner 6" class="partner-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- From insight to impact section -->
+    <section class="insight-impact-section">
+        <div class="insight-container">
+            <h2>From insight to impact</h2>
+            <div class="insight-content">
+                <div class="insight-item">
+                    <div class="insight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M3.5 14H4.66667M14 3.5V4.66667M23.3333 14H24.5M6.53333 6.53333L7.35 7.35M21.4667 6.53333L20.65 7.35M11.3167 19.8333H16.6833M10.5 18.6667C9.52055 17.9321 8.79706 16.9079 8.432 15.7393C8.06695 14.5707 8.07885 13.3168 8.46601 12.1553C8.85318 10.9939 9.59597 9.98362 10.5892 9.26775C11.5824 8.55188 12.7757 8.16667 14 8.16667C15.2243 8.16667 16.4176 8.55188 17.4108 9.26775C18.404 9.98362 19.1468 10.9939 19.534 12.1553C19.9211 13.3168 19.933 14.5707 19.568 15.7393C19.2029 16.9079 18.4795 17.9321 17.5 18.6667C17.0445 19.1176 16.7015 19.6694 16.4988 20.2774C16.2962 20.8854 16.2395 21.5326 16.3333 22.1667C16.3333 22.7855 16.0875 23.379 15.6499 23.8166C15.2123 24.2542 14.6188 24.5 14 24.5C13.3812 24.5 12.7877 24.2542 12.3501 23.8166C11.9125 23.379 11.6667 22.7855 11.6667 22.1667C11.7605 21.5326 11.7038 20.8854 11.5011 20.2774C11.2985 19.6694 10.9555 19.1176 10.5 18.6667Z" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="insight-header">
+                        <div class="insight-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                <path d="M3.5 14H4.66667M14 3.5V4.66667M23.3333 14H24.5M6.53333 6.53333L7.35 7.35M21.4667 6.53333L20.65 7.35M11.3167 19.8333H16.6833M10.5 18.6667C9.52055 17.9321 8.79706 16.9079 8.432 15.7393C8.06695 14.5707 8.07885 13.3168 8.46601 12.1553C8.85318 10.9939 9.59597 9.98362 10.5892 9.26775C11.5824 8.55188 12.7757 8.16667 14 8.16667C15.2243 8.16667 16.4176 8.55188 17.4108 9.26775C18.404 9.98362 19.1468 10.9939 19.534 12.1553C19.9211 13.3168 19.933 14.5707 19.568 15.7393C19.2029 16.9079 18.4795 17.9321 17.5 18.6667C17.0445 19.1176 16.7015 19.6694 16.4988 20.2774C16.2962 20.8854 16.2395 21.5326 16.3333 22.1667C16.3333 22.7855 16.0875 23.379 15.6499 23.8166C15.2123 24.2542 14.6188 24.5 14 24.5C13.3812 24.5 12.7877 24.2542 12.3501 23.8166C11.9125 23.379 11.6667 22.7855 11.6667 22.1667C11.7605 21.5326 11.7038 20.8854 11.5011 20.2774C11.2985 19.6694 10.9555 19.1176 10.5 18.6667Z" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Solution</h3>
+                    </div>
+                    <p>We approach each project with a strategic mindset, offering tailored solutions that address specific business needs. Our goal is to deliver clarity, direction, and measurable value through every stage of the process.</p>
+                </div>
+                
+                <div class="insight-item">
+                    <div class="insight-header">
+                        <div class="insight-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
+<path d="M17.0002 4.66675H24.0002V11.6667H17.0002V4.66675Z" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.3335 16.3334H12.3335V23.3334H5.3335V16.3334Z" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.0002 19.8334C17.0002 20.7617 17.3689 21.6519 18.0253 22.3083C18.6817 22.9647 19.5719 23.3334 20.5002 23.3334C21.4284 23.3334 22.3187 22.9647 22.975 22.3083C23.6314 21.6519 24.0002 20.7617 24.0002 19.8334C24.0002 18.9052 23.6314 18.0149 22.975 17.3585C22.3187 16.7022 21.4284 16.3334 20.5002 16.3334C19.5719 16.3334 18.6817 16.7022 18.0253 17.3585C17.3689 18.0149 17.0002 18.9052 17.0002 19.8334Z" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.3335 8.16675C5.3335 8.62637 5.42403 9.0815 5.59992 9.50614C5.77581 9.93078 6.03362 10.3166 6.35862 10.6416C6.68363 10.9666 7.06946 11.2244 7.4941 11.4003C7.91874 11.5762 8.37387 11.6667 8.8335 11.6667C9.29312 11.6667 9.74825 11.5762 10.1729 11.4003C10.5975 11.2244 10.9834 10.9666 11.3084 10.6416C11.6334 10.3166 11.8912 9.93078 12.0671 9.50614C12.243 9.0815 12.3335 8.62637 12.3335 8.16675C12.3335 7.70712 12.243 7.252 12.0671 6.82736C11.8912 6.40272 11.6334 6.01688 11.3084 5.69187C10.9834 5.36687 10.5975 5.10906 10.1729 4.93317C9.74825 4.75728 9.29312 4.66675 8.8335 4.66675C8.37387 4.66675 7.91874 4.75728 7.4941 4.93317C7.06946 5.10906 6.68363 5.36687 6.35862 5.69187C6.03362 6.01688 5.77581 6.40272 5.59992 6.82736C5.42403 7.252 5.3335 7.70712 5.3335 8.16675Z" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+                        </div>
+                        <h3>Diversity</h3>
+                    </div>
+                    <p>We embrace the power of diversity—in perspectives, experiences, and project types. This approach allows us to craft innovative strategies that resonate across industries, markets, and cultures.</p>
+                </div>
+                
+                <div class="insight-item">
+                    <div class="insight-header">
+                        <div class="insight-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
+<path d="M3.8335 14H7.3335M14.3335 3.5V7M9.43347 9.10001L6.8668 6.53334M19.2335 9.10001L21.8002 6.53334M9.43347 18.9L6.8668 21.4667M14.3335 14L24.8335 17.5L20.1668 19.8333L17.8335 24.5L14.3335 14Z" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+                        </div>
+                        <h3>Action</h3>
+                    </div>
+                    <p>Ideas are only valuable when executed. We turn strategic thinking into tangible results through efficient planning, clear communication, and decisive implementation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-- Team Section -->
+    <section class="team-section">
+        <div class="team-container">
+            <div class="team-header">
+                <div class="insights-badge"><span class="noqte"> ● </span> Our team </div>
+                <h2 class="team-title">
+                    We deliver tailored property solutions that 
+                    <span class="highlight15">maximize your returns</span> and minimize risk.
+                </h2>
+                <a href="/join our team/joinour.html" class="join-team-link">Join our team</a>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image-container">
+                        <img src="/assets/images/image 1.png" alt="Sabina Gazizade" class="member-image">
+                        <button class="add-button" onclick="openModal('sabina')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M9 1V17M1 9H17" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Sabina Gazizade</h3>
+                        <p class="member-title">Founder</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image-container">
+                        <img src="/assets/images/image 9.png" alt="Yelena İsmayilova" class="member-image">
+                        <button class="add-button" onclick="openModal('yelena1')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M9 1V17M1 9H17" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Yelena İsmayilova</h3>
+                        <p class="member-title">Head of Leasing and Brokerage</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image-container">
+                        <img src="/assets/images/image 7.png" alt="Nurana İsgandarova" class="member-image">
+                        <button class="add-button" onclick="openModal('nurana')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M9 1V17M1 9H17" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Nurana İsgandarova</h3>
+                        <p class="member-title">Marketing manager</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image-container">
+                        <img src="/assets/images/image 8.png" alt="Yelena İsmayilova" class="member-image">
+                        <button class="add-button" onclick="openModal('yelena2')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M9 1V17M1 9H17" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Yelena İsmayilova</h3>
+                        <p class="member-title">Head of Leasing and Brokerage</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="load-more-btn" onclick="toggleLoadMore()">
+                <span>Load more </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5V19M12 19L18 13M12 19L6 13" stroke="currenColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="#00B2BA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="" class="modal-image">
+                </div>
+                <div class="modal-info">
+                    <h3 id="modal-name" class="modal-name"></h3>
+                    <p id="modal-title" class="modal-title"></p>
+                    <div id="modal-description" class="modal-description"></div>
+                    <button class="connect-button">
+                        Connect 
+                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                       <rect width="20" height="20" fill="#F3FBFC"/>
+                       <path d="M5.69141 15.9999H2.78516V6.65616H5.69141V15.9999ZM4.22266 5.40616C3.31641 5.40616 2.56641 4.62491 2.56641 3.68741C2.56641 2.40616 3.94141 1.59366 5.06641 2.24991C5.59766 2.53116 5.91016 3.09366 5.91016 3.68741C5.91016 4.62491 5.16016 5.40616 4.22266 5.40616ZM16.5352 15.9999H13.6602V11.4687C13.6602 10.3749 13.6289 8.99991 12.1289 8.99991C10.6289 8.99991 10.4102 10.1562 10.4102 11.3749V15.9999H7.50391V6.65616H10.2852V7.93741H10.3164C10.7227 7.21866 11.6602 6.43741 13.0664 6.43741C16.0039 6.43741 16.5664 8.37491 16.5664 10.8749V15.9999H16.5352Z" fill="#002425"/>
+                       </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!--contact section -->
+          <section class="contact-section">
+        <div class="image-container">
+            <img src="/assets/images/sda contact 1.png" alt="Contact" class="contact-image">
+            
+            <div class="content">
+                <div class="pill">
+                    <span class="contact-text">Contact</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none">
+                        <circle cx="6" cy="6.81543" r="6" fill="#00B2BA"/>
+                    </svg>
+                </div>
+
+                <h1 class="title19">Let's build <span class="highlight15"> strong </span> <br> future together</h1>
+
+                <a href="/contacts/contacts.html" class="cta-button">
+                    <span>Get in touch</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 25" fill="none">
+                        <path d="M17 7.31543L7 17.3154M17 7.31543H8M17 7.31543V16.3154" stroke="#F3FBFC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+     <!-- Footer -->
+  <footer class="footer">
+        <div class="container9">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/assets/images/SDAlogo.png" alt="SDA Logo" class="logo-image">
+                    </div>
+                    <div class="social-links2">
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                         <path d="M17.3174 10.9077C17.3174 6.62646 13.8486 3.15771 9.56738 3.15771C5.28613 3.15771 1.81738 6.62646 1.81738 10.9077C1.81738 14.7827 4.62988 18.0015 8.34863 18.564V13.1577H6.37988V10.9077H8.34863V9.22021C8.34863 7.28271 9.50488 6.18896 11.2549 6.18896C12.1299 6.18896 13.0049 6.34521 13.0049 6.34521V8.25146H12.0361C11.0674 8.25146 10.7549 8.84521 10.7549 9.47021V10.9077H12.9111L12.5674 13.1577H10.7549V18.564C14.4736 18.0015 17.3174 14.7827 17.3174 10.9077Z" fill="#F3FBFC"/>
+                        </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                           <path d="M5.69202 16.8155H2.78577V7.47171H5.69202V16.8155ZM4.22327 6.22171C3.31702 6.22171 2.56702 5.44046 2.56702 4.50296C2.56702 3.22171 3.94202 2.40921 5.06702 3.06546C5.59827 3.34671 5.91077 3.90921 5.91077 4.50296C5.91077 5.44046 5.16077 6.22171 4.22327 6.22171ZM16.5358 16.8155H13.6608V12.2842C13.6608 11.1905 13.6295 9.81546 12.1295 9.81546C10.6295 9.81546 10.4108 10.9717 10.4108 12.1905V16.8155H7.50452V7.47171H10.2858V8.75296H10.317C10.7233 8.03421 11.6608 7.25296 13.067 7.25296C16.0045 7.25296 16.567 9.19046 16.567 11.6905V16.8155H16.5358Z" fill="#F3FBFC"/>
+                           </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column1">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="/about/about.html">About us</a></li>
+                            <li><a href="/join our team/joinour.html">Career</a></li>
+                            <li><a href="/news page/news.html">Blog</a></li>
+                            <li><a href="/contacts/contacts.html">Contacts</a></li>
+                            <li><a href="/privacy policy/privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Property types</h4>
+                        <ul>
+                            <li><a href="/property inner pagek/sectorinner.html">Shopping malls</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Residential buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Multifunctional buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Retail & Commercial buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Office buildings</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="/Services/services.html">Property development consulting</a></li>
+                            <li><a href="/Services/services.html">Property leasing & sales</a></li>
+                            <li><a href="/services inner page/servicesinner.html">Market research & analytics</a></li>
+                            <li><a href="/services inner page/servicesinner.html">Property marketing strategy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>©2025 All rights reserved.</p>
+                <p>Created by <a href="https://myteam.az" target="_blank" rel="noopener noreferrer">My Team</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/about.js"></script>
+    </body>
+    </html>

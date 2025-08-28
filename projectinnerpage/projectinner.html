@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDA - Professional Navigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/projectinner.css">
+</head>
+<body>
+     <nav class="navbar">
+        <div class="nav-container">
+            <div class="ellipse ellipse-right"></div>
+            <a href="#" class="logo"> 
+                <img src="/assets/images/SDA 1.png" alt="SDA Logo">
+            </a>
+
+            <ul class="nav-center">
+                <li class="nav-item">
+                    <a href="/about/about.html" class="nav-link">About us</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleDropdown('services')">
+                        Services
+                        <svg class="dropdown-arrow" id="services-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="services-dropdown">
+                       <a href="/Services/services.html" class="dropdown-item">Property development consulting</a>
+                        <a href="/services inner page/servicesinner.html" class="dropdown-item">Property leasing & sales</a>
+                        <a href="/Services/services.html" class="dropdown-item">Market research & analytics</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/project bolumu/project/index.html" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleDropdown('property')">
+                        Properties
+                        <svg class="dropdown-arrow" id="property-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="property-dropdown">
+                         <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Shopping malls</a>
+                        <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Residential buildings</a>
+                        <a href="/property inner pagek/sectorinner.html" class="dropdown-item">Commercial buildings</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/news page/news.html" class="nav-link">News</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="language-dropdown">
+                    <button class="language-btn" onclick="toggleDropdown('language')">
+                        <span id="selected-language">EN</span>
+                        <svg class="dropdown-arrow" id="language-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="language-dropdown">
+                        <a href="#" class="dropdown-item" onclick="setLanguage('AZ')">AZ</a>
+                        <a href="#" class="dropdown-item" onclick="setLanguage('RU')">RU</a>
+                    </div>
+                </div>
+                <a href="/contacts/contacts.html"><button class="contact-btn">Contact Us</button></a>
+            </div>
+
+            <div class="mobile-controls">
+                <div class="language-dropdown">
+                    <button class="mobile-language-btn" onclick="toggleDropdown('mobile-language')">
+                        <span id="mobile-selected-language">EN</span>
+                        <svg class="dropdown-arrow" id="mobile-language-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="mobile-language-dropdown">
+                        <a href="#" class="dropdown-item" onclick="setMobileLanguage('AZ')">AZ</a>
+                        <a href="#" class="dropdown-item" onclick="setMobileLanguage('RU')">RU</a>
+                    </div>
+                </div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <svg class="hamburger-icon" id="hamburger-icon" viewBox="0 0 24 24">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-content">
+                <div class="mobile-nav-item">
+                    <a href="/about/about.html" class="mobile-nav-link">About us</a>
+                </div>
+                <div class="mobile-nav-item">
+                    <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('mobile-services')">
+                        Services
+                        <svg class="dropdown-arrow" id="mobile-services-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown-content" id="mobile-services-dropdown">
+                         <a href="/Services/services.html" class="mobile-dropdown-item">Property development consulting</a>
+                        <a href="/services inner page/servicesinner.html" class="mobile-dropdown-item">Property leasing & sales</a>
+                        <a href="/Services/services.html" class="mobile-dropdown-item">Market research & analytics</a>
+                    </div>
+                </div>
+                <div class="mobile-nav-item">
+                    <a href="/projects/projects.html" class="mobile-nav-link">Projects</a>
+                </div>
+                <div class="mobile-nav-item">
+                    <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('mobile-property')">
+                        Properties
+                        <svg class="dropdown-arrow" id="mobile-property-arrow" viewBox="0 0 24 24">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown-content" id="mobile-property-dropdown">
+                       <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Shopping malls</a>
+                        <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Residential buildings</a>
+                        <a href="/property inner pagek/sectorinner.html" class="mobile-dropdown-item">Commercial buildings</a>
+                    </div>
+                </div>
+                <div class="mobile-nav-item">
+                    <a href="/news/news.html" class="mobile-nav-link">News</a>
+                </div>
+                 <div class="mobile-nav-item">
+                    <button class="contact-btn" onclick="window.location.href='/contacts/contacts.html'">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--container kismi-->
+    <div class="container">
+        <div class="content">
+            <h1 class="title">Sevinc Mall</h1>
+            <p class="description">A dynamic retail center designed to offer a modern and<br> engaging shopping experience.</p>
+            <div class="image-container">
+                <img src="/assets/images/image 10.png" alt="Modern Mall Building" class="main-image">
+            </div>
+        </div>
+    </div>
+
+    <!--about project-->
+    <div class="container1">
+    <div class="left-section1">
+        <h2>About the project</h2>
+        <p>SDA Consulting played a key role in the  development and strategic positioning of the mall, supporting its  commercial planning and tenant mix strategy.</p>
+        <p>Through market analysis and tailored consulting  services, we helped enhance the mall's appeal to both  retailers and customers.</p>
+    </div>
+    <div class="right-section1">
+        <div class="detail-item1">
+            <span class="label1">Year</span>
+            <span class="value1">2024</span>
+        </div>
+        <div class="detail-item1">
+            <span class="label1">Client</span>
+            <span class="value1">Sevinc Mall</span>
+        </div>
+        <div class="detail-item1">
+            <span class="label1">Property type</span>
+            <span class="value1">Shopping mall</span>
+        </div>
+        <div class="detail-item1">
+            <span class="label1">Services</span>
+            <div class="services-list1">
+                <div class="service-item1">— Area analysis</div>
+                <div class="service-item1">— Technical consulting</div>
+                <div class="service-item1">— Market introduction</div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--gallery-->
+    <div class="gallery">
+        <div class="image-wrapper">
+            <img src="/assets/images/image 13.png" alt="Modern Architecture Building 1">
+        </div>
+        <div class="image-wrapper">
+            <img src="/assets/images/image 12.png" alt="Modern Architecture Building 2">
+        </div>
+    </div>
+
+ <!--delivered solutions-->
+
+    <div class="container3">
+        <div class="header3">
+            <div class="left-section3">
+                <div class="delivered-tag3">
+                    <span class="bullet3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none">
+                        <circle cx="6" cy="6.5" r="6" fill="#00B2BA"/>
+                        </svg>
+                    </span>
+                    Delivered solutions
+                </div>
+            </div>
+            <div class="right-section3">
+                <h1>
+                    <span class="desktop-text3">We provided <span class="highlight3">strategic consulting</span> that<br> shaped a retail space into a thriving<br> <span class="highlight3">commercial destination.</span></span>
+                    <span class="mobile-text3">We provided strategic <br>
+    consulting that shaped <br>
+    a retail space into a <br>
+    thriving commercial <br>
+    destination.</span>
+                </h1>
+            </div>
+        </div>
+        
+        <div class="content3">
+            <div class="cards-container3">
+                <div class="card3">
+                    <div class="card-header3">
+                        <div class="card-number3">01</div>
+                        <div class="card-line3"></div>
+                    </div>
+                    <h3>Area Analysis & Customer Profiling</h3>
+                    <p>In-depth assessment to identify market potential and target audiences.</p>
+                </div>
+                
+                <div class="card3">
+                    <div class="card-header3">
+                        <div class="card-number3">02</div>
+                        <div class="card-line3"></div>
+                    </div>
+                    <h3>Area Analysis & Customer Profiling</h3>
+                    <p>In-depth assessment to identify market potential and target audiences.</p>
+                </div>
+                
+                <div class="card3">
+                    <div class="card-header3">
+                        <div class="card-number3">03</div>
+                        <div class="card-line3"></div>
+                    </div>
+                    <h3>Area Analysis & Customer Profiling</h3>
+                    <p>In-depth assessment to identify market potential and target audiences.</p>
+                </div>
+                
+                <div class="card3">
+                    <div class="card-header3">
+                        <div class="card-number3">04</div>
+                        <div class="card-line3"></div>
+                    </div>
+                    <h3>Area Analysis & Customer Profiling</h3>
+                    <p>In-depth assessment to identify market potential and target audiences.</p>
+                </div>
+                
+                <div class="card3">
+                    <div class="card-header3">
+                        <div class="card-number3">05</div>
+                        <div class="card-line3"></div>
+                    </div>
+                    <h3>Area Analysis & Customer Profiling</h3>
+                    <p>In-depth assessment to identify market potential and target audiences.</p>
+                </div>
+                
+                <div class="card3">
+                    <div class="card-header3">
+                        <div class="card-number3">06</div>
+                        <div class="card-line3"></div>
+                    </div>
+                    <h3>Area Analysis & Customer Profiling</h3>
+                    <p>In-depth assessment to identify market potential and target audiences.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--other projects-->
+    <div class="projects-wrapper5">
+    <div class="header5">
+        <h1 class="title5">Other projects</h1>
+        <a href="/project bolumu/project/index.html" class="see-all5">See all</a>
+    </div>
+    
+    <div class="projects-grid5">
+        <div class="project-card5">
+            <div class="project-image5">
+                <a href="/project bolumu/project/index.html"><img src="/assets/images/image 1-2.png" alt="Podium Mall"></a>
+            </div>
+            <div class="project-title-container5">
+                <h3 class="project-title5">Podium Mall</h3>
+                <a href="/project bolumu/project/index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" class="project-icon5">
+                    <path d="M22.6663 9.3335L9.33301 22.6668M22.6663 9.3335H10.6663M22.6663 9.3335V21.3335" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </a>
+            </div>
+        </div>
+        
+        <div class="project-card5">
+            <div class="project-image5">
+                <a href="/project bolumu/project/index.html"><img src="/assets/images/image 1-2.png" alt="Podium Mall"></a>
+            </div>
+            <div class="project-title-container5">
+                <h3 class="project-title5">Podium Mall</h3>
+                <a href="/project bolumu/project/index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" class="project-icon5">
+                    <path d="M22.6663 9.3335L9.33301 22.6668M22.6663 9.3335H10.6663M22.6663 9.3335V21.3335" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+   <!--contact section -->
+          <section class="contact-section12">
+        <div class="image-container12">
+            <img src="/assets/images/sda contact 1.png" alt="Contact" class="contact-image12">
+            
+            <div class="content12">
+                <div class="pill12">
+                    <span class="contact-text12">Contact</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none">
+                        <circle cx="6" cy="6.81543" r="6" fill="#00B2BA"/>
+                    </svg>
+                </div>
+
+                <h1 class="title19">Let's build <span class="highlight3"> strong </span> <br> future together</h1>
+
+                <a href="/contacts/contacts.html" class="cta-button">
+                    <span>Get in touch</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 25" fill="none">
+                        <path d="M17 7.31543L7 17.3154M17 7.31543H8M17 7.31543V16.3154" stroke="#F3FBFC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+  <footer class="footer">
+        <div class="container9">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/assets/images/SDAlogo.png" alt="SDA Logo" class="logo-image">
+                    </div>
+                    <div class="social-links2">
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                         <path d="M17.3174 10.9077C17.3174 6.62646 13.8486 3.15771 9.56738 3.15771C5.28613 3.15771 1.81738 6.62646 1.81738 10.9077C1.81738 14.7827 4.62988 18.0015 8.34863 18.564V13.1577H6.37988V10.9077H8.34863V9.22021C8.34863 7.28271 9.50488 6.18896 11.2549 6.18896C12.1299 6.18896 13.0049 6.34521 13.0049 6.34521V8.25146H12.0361C11.0674 8.25146 10.7549 8.84521 10.7549 9.47021V10.9077H12.9111L12.5674 13.1577H10.7549V18.564C14.4736 18.0015 17.3174 14.7827 17.3174 10.9077Z" fill="#F3FBFC"/>
+                        </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                           <path d="M5.69202 16.8155H2.78577V7.47171H5.69202V16.8155ZM4.22327 6.22171C3.31702 6.22171 2.56702 5.44046 2.56702 4.50296C2.56702 3.22171 3.94202 2.40921 5.06702 3.06546C5.59827 3.34671 5.91077 3.90921 5.91077 4.50296C5.91077 5.44046 5.16077 6.22171 4.22327 6.22171ZM16.5358 16.8155H13.6608V12.2842C13.6608 11.1905 13.6295 9.81546 12.1295 9.81546C10.6295 9.81546 10.4108 10.9717 10.4108 12.1905V16.8155H7.50452V7.47171H10.2858V8.75296H10.317C10.7233 8.03421 11.6608 7.25296 13.067 7.25296C16.0045 7.25296 16.567 9.19046 16.567 11.6905V16.8155H16.5358Z" fill="#F3FBFC"/>
+                           </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column1">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="/about/about.html">About us</a></li>
+                            <li><a href="/join our team/joinour.html">Career</a></li>
+                            <li><a href="/news page/news.html">Blog</a></li>
+                            <li><a href="/contacts/contacts.html">Contacts</a></li>
+                            <li><a href="/privacy policy/privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Property types</h4>
+                        <ul>
+                            <li><a href="/property inner pagek/sectorinner.html">Shopping malls</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Residential buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Multifunctional buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Retail & Commercial buildings</a></li>
+                            <li><a href="/property inner pagek/sectorinner.html">Office buildings</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="/Services/services.html">Property development consulting</a></li>
+                            <li><a href="/Services/services.html">Property leasing & sales</a></li>
+                            <li><a href="/services inner page/servicesinner.html">Market research & analytics</a></li>
+                            <li><a href="/services inner page/servicesinner.html">Property marketing strategy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>©2025 All rights reserved.</p>
+                <p>Created by <a href="https://myteam.az" target="_blank" rel="noopener noreferrer">My Team</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/projectinner.js"></script>
+</body>
+</html>
