@@ -113,3 +113,5 @@ let activeDropdown = null;
       arrow.classList.toggle('rotated'); // veya sadece aria-expanded ile bırak
     }
   }
+
+ 

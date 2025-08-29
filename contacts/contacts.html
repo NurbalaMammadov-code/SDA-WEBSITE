@@ -311,6 +311,35 @@
         </div>
     </footer>
 
+
+    <script type="module">
+  import { submitContact } from "../assets/js/contactApi.js";
+
+  const form = document.getElementById("contact-form");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const fullName = document.getElementById("name")?.value.trim() || "";
+      const phone    = document.getElementById("phone")?.value.trim() || "";
+      const email    = document.getElementById("email")?.value.trim() || "";
+      const message  = document.getElementById("message")?.value || "";
+
+      const cvEl   = document.getElementById("cv");
+      const cvFile = cvEl && cvEl.files && cvEl.files[0] ? cvEl.files[0] : null;
+
+      try {
+        await submitContact({ fullName, phone, email, message, cvFile });
+        alert("Mesaj gönderildi!");
+        form.reset();
+      } catch (err) {
+        alert(err?.message || "Gönderilemedi.");
+      }
+    });
+  }
+</script>
+
+
     <script src="/assets/js/contractsc.js"></script>
     </body>
     </html>
