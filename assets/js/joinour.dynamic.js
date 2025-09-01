@@ -1,6 +1,6 @@
 // /assets/js/joinour.dynamic.js
 (function () {
-  const API = "http://153.92.223.91:8000";
+  const API = "";
 
   const $ = (s, r = document) => r.querySelector(s);
 
