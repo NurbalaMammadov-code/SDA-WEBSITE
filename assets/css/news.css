@@ -13,6 +13,7 @@ html, body {
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: transparent;
+    padding-top: 20px;
 }
 
 h1 {
@@ -1203,7 +1204,7 @@ margin-top: -6rem;
 }
 
 .footer-column1 ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 
@@ -1241,7 +1242,7 @@ margin-top: -6rem;
 }
 
 .footer-column ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 .footer-bottom {

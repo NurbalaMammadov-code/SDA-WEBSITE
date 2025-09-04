@@ -6,7 +6,7 @@ export function toAbsolute(url) {
   return url.startsWith('http') ? url : `${API_BASE}${url.startsWith('/') ? '' : '/'}${url}`;
 }
 
-export async function request(path, { method='GET', params, body } = {}) {
+export async function request(path, { method='GET', params, body } = {}) {                                                                                     l
   let url = `${API_BASE}${path}`;
   if (params) {
     const u = new URL(url);

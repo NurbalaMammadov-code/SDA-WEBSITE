@@ -13,6 +13,7 @@ html, body {
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: transparent;
+    padding-top: 30px;
 }
 
 h1 {
@@ -469,7 +470,7 @@ main {
 }
 
 header {
-    margin-bottom: 56px;
+    margin-bottom: 56px; 
 }
 
 h1 {
@@ -482,6 +483,7 @@ h1 {
     line-height: 125%;
     word-wrap: break-word;
     hyphens: auto;
+    margin-top: 25px;
 }
 
 .subtitle {
@@ -497,6 +499,7 @@ h1 {
 .content-body {
     line-height: 150%;
     overflow: hidden;
+    margin-bottom: 30px;
 }
 
 .content-body p {
@@ -711,7 +714,7 @@ margin-top: -6rem;
 }
 
 .footer-column1 ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 
@@ -749,7 +752,7 @@ margin-top: -6rem;
 }
 
 .footer-column ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 .footer-bottom {

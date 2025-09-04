@@ -215,17 +215,17 @@ h1, h2 {
   min-width: unset;
 
   border-radius: 0 0 8px 8px;       /* üst köşeleri sıfırla */
-  border: 1px solid #9747FF;        /* senin rengi */
-  background: #1E1D1D;              /* senin rengi */
+  border: 1px solid #D0DDDD;        /* senin rengi */
+  background: transparent;              /* senin rengi */
   box-shadow: none;                  /* pencere gibi durmasın */
   z-index: 9999;
 }
 
 /* 2) Menü AÇIKKEN butonun da aynı bloğun parçası gibi görünmesi */
 .language-dropdown:has(.dropdown-menu.active) .language-btn{
-  background: #1E1D1D;
+  background: transparent;
   color: #F3FBFC;
-  border: 1px solid #9747FF;
+  border: 1px solid #D0DDDD;
   border-bottom: none;              /* menü ile dikişsiz birleşsin */
   border-radius: 8px 8px 0 0;
 }
@@ -242,9 +242,9 @@ h1, h2 {
 }
 
 .mobile-controls .language-dropdown:has(.dropdown-menu.active) .mobile-language-btn{
-  background: #1E1D1D;
+  background: transparent;
   color: #F3FBFC;
-  border: 1px solid #9747FF;
+  border: 1px solid #D0DDDD;
   border-bottom: none;
   border-radius: 8px 8px 0 0;
 }
@@ -548,7 +548,7 @@ h1, h2 {
 
 .hero-button:hover {
   border: 1px solid var(--Primary-Base, #00B2BA);
-background: var(--Interface-White, #F3FBFC);
+background: var(--Interface-White, #F3FBFC) ;
 color: #002425;
 }
 
@@ -812,6 +812,7 @@ color: var(--Interface-White, #F3FBFC);
     font-weight: 500;
     line-height: 125%;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .discover-button:hover {
@@ -1284,6 +1285,10 @@ color: var(--Interface-White, #F3FBFC);
     flex-shrink: 0;
     width: 539px;
     max-width: 539px;
+}
+
+.card-title1 {
+  text-decoration: none;
 }
 
 
@@ -2075,6 +2080,13 @@ color: var(--Interface-White, #F3FBFC);
   min-height: 2.8rem;
 }
 
+.card-title-link {
+  text-decoration: none; 
+  color: inherit;        
+  display: inline-block; 
+}
+
+
 .read-more-link {
   position: relative; 
   color: var(--Primary-Base, #00B2BA);
@@ -2563,7 +2575,7 @@ margin-top: -6rem;
 }
 
 .footer-column1 ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 
@@ -2601,7 +2613,7 @@ margin-top: -6rem;
 }
 
 .footer-column ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 .footer-bottom {

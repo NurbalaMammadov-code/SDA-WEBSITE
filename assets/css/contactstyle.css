@@ -14,6 +14,7 @@
         body {
     font-family: 'Montserrat', sans-serif;
     background-color: transparent;
+    padding-top: 30px;
 }
 
 h1 {
@@ -529,18 +530,16 @@ h1 {
     display: block;
     font-weight: 400;
     color: var(--Text-Medium, #455E5F);
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-   
-    
-}
-
-.info-item p {
-    color: #000;
-    margin: 0;
+    margin-bottom: 0.5rem; 
     font-size: 18px;
     font-weight: 500;
     line-height: 125%;
+    text-decoration: none;
+}
+
+.info-item a {
+    color: #000;
+    text-decoration: none;
 }
 
 .social-links {
@@ -603,6 +602,11 @@ h1 {
     background-color: transparent;
     color:  var(--Text-Dark, #002425);
     outline: none;
+}
+
+.property-dropdown {
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .form-group input::placeholder {
@@ -700,6 +704,7 @@ h1 {
     color: var(--Primary-Dark, #003B3E);
     line-height: 1.5;
     cursor: pointer;
+    accent-color: #003B3E;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -725,6 +730,8 @@ line-height: 150%;
 .submit-btn {
     background-color: var(--Primary-Dark, #003B3E);
     color: #F3FBFC;
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
     padding: 14px 28px;
     border: none;
     font-size: 1rem;
@@ -1095,7 +1102,7 @@ margin-top: -6rem;
 }
 
 .footer-column1 ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 
@@ -1133,7 +1140,7 @@ margin-top: -6rem;
 }
 
 .footer-column ul li a:hover {
-    color: #4A90A4;
+    color: var(--Text-Medium, #455E5F);
 }
 
 .footer-bottom {
