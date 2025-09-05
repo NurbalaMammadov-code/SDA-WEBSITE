@@ -3,7 +3,10 @@ export const API_BASE = window.location.origin;
 
 export function toAbsolute(url) {
   if (!url) return '';
-  return url.startsWith('http') ? url : `${API_BASE}${url.startsWith('/') ? '' : '/'}${url}`;
+  if (url.startsWith('http')) return url;
+  // Ensure URL starts with / for absolute paths
+  const cleanUrl = url.startsWith('/') ? url : `/${url}`;
+  return `${API_BASE}${cleanUrl}`;
 }
 
 export async function request(path, { method='GET', params, body } = {}) {                                                                                     l
