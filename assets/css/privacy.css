@@ -470,7 +470,7 @@ main {
 }
 
 header {
-    margin-bottom: 56px; 
+    margin-bottom: 80px; 
 }
 
 h1 {
@@ -730,7 +730,7 @@ margin-top: -6rem;
 
 .footer-column ul {
     list-style: none;
-    width: 110%;
+    width: 111%;
 }
 
 .footer-column ul li {
@@ -749,6 +749,7 @@ margin-top: -6rem;
     transition: color 0.3s ease;
     gap: 24px;
     width: 100%;
+    margin-right: 50px;
 }
 
 .footer-column ul li a:hover {

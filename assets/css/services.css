@@ -479,7 +479,7 @@ h1, h2 {
        .container {
     max-width: 1440px;
     margin: 0 auto;
-    overflow-x: hidden;
+    overflow-x: visible;
 }
 
 /* Hero Section */
@@ -573,13 +573,31 @@ h1, h2 {
 .property-section {
     display: flex;
     width: 100%;
-    background: #E7F2F3;
     max-width: 100%;
+    background: #E7F2F3;
     padding: 112px 56px;
     margin: 0 auto;
     gap: 120px;
-    
+     position: relative;   /* pseudo'yu yerleştirmek için */
+    isolation: isolate;
 }
+
+.property-section::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 100vw;                 /* viewport genişliği kadar */
+  transform: translateX(-50%);  /* ekranın merkezine sabitle */
+  background: #E7F2F3;          /* senin arka plan rengin */
+  z-index: -1;                  /* içeriğin altında */
+  pointer-events: none;
+}
+
+/* mobilde 1px taşma olmasın (varsa destekler) */
+@supports (width: 100dvw) {
+  .property-section::after { width: 100dvw; }
+}
+
 
 .property-header {
     flex-shrink: 0;
@@ -1312,12 +1330,31 @@ h1, h2 {
     color: white;
     padding: 4rem 0 3rem;
     box-sizing: border-box;
+    position: relative;   /* pseudo için */
+  isolation: isolate;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;                 /* ekran genişliğine yay */
+  transform: translateX(-50%);  /* ekranın merkezine sabitle */
+  background: #002425;          /* sizin footer renginiz */
+  z-index: -1;                  /* içerik altında kalsın */
+  pointer-events: none;
+}
+
+@supports (width: 100dvw) {
+  .footer::before { width: 100dvw; }  /* mobil 1–2px taşmaları önler */
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;;
+    align-items: flex-start;
     width: 1440px;
     padding: 112px 56px 56px 56px;
     gap: 6rem;
@@ -1443,7 +1480,7 @@ margin-top: -6rem;
 
 .footer-column ul {
     list-style: none;
-    width: 110%;
+    width: 111%;
 }
 
 .footer-column ul li {
@@ -1462,6 +1499,7 @@ margin-top: -6rem;
     transition: color 0.3s ease;
     gap: 24px;
     width: 100%;
+    margin-right: 50px;
 }
 
 .footer-column ul li a:hover {

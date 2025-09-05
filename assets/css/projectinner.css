@@ -514,7 +514,7 @@ h1, h2 {
 
 .main-image {
     width: 1328.333px;
-    height: 797px;
+    height: 600px;
     flex-shrink: 0;
     aspect-ratio: 1328.33/797.00;
     object-fit: cover;
@@ -1036,7 +1036,7 @@ h1 {
 }
 
 .content3 {
-    margin-left: 280px;
+    margin-left: 320px;
 }
 
 .cards-container3 {
@@ -1975,7 +1975,7 @@ margin-top: -6rem;
 
 .footer-column ul {
     list-style: none;
-    width: 110%;
+    width: 111%;
 }
 
 .footer-column ul li {
@@ -1994,6 +1994,7 @@ margin-top: -6rem;
     transition: color 0.3s ease;
     gap: 24px;
     width: 100%;
+    margin-right: 50px;
 }
 
 .footer-column ul li a:hover {
