@@ -117,7 +117,6 @@
     transition: all 0.2s ease;
     z-index: 1100;
     margin-top: 0.5rem;
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -132,7 +131,10 @@
     padding: 0.75rem 1rem;
     color: var(--Text-Dark, #002425);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 18px;
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     transition: all 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
@@ -146,7 +148,8 @@
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
+    margin-right: 25px;
 }
 
 .language-dropdown {
@@ -448,11 +451,15 @@
 
  @media (max-width:1024px) {
             .nav-link {
-                font-size: 15px;
+                font-size: 14px;
             }
 
             .language-btn {
-              font-size: 15px;
+              font-size: 14px;
+            }
+
+            .dropdown-item {
+              font-size: 14px;
             }
         }
 
@@ -637,6 +644,8 @@
     padding: 112px 56px 56px 56px;
     gap: 6rem;
     margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -693,7 +702,7 @@ margin-top: -6rem;
     gap: 64px;
     flex-wrap: wrap;
      margin-top: -6rem; 
-  transform: translateX(-6rem); 
+  transform: translateX(2.5rem);  
 }
 
 

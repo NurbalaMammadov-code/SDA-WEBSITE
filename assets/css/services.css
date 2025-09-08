@@ -21,9 +21,17 @@ h1, h2 {
     font-family: 'Encode Sans Expanded', sans-serif;
 }
 
+.navbar-wrapper {
+    height: 64px; /* navbar yüksekliği kadar (64px + padding-top vs) */
+}
+
 .navbar {
     background-color: transparent;
-    position: relative; 
+     position: fixed;
+    top: 30px;
+    left: 0;
+    right: 0;
+    width: 100%;
     z-index: 2000;
 }
 
@@ -117,7 +125,6 @@ h1, h2 {
     transition: all 0.2s ease;
     z-index: 1100;
     margin-top: 0.5rem;
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -132,7 +139,10 @@ h1, h2 {
     padding: 0.75rem 1rem;
     color: var(--Text-Dark, #002425);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 18px;
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     transition: all 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
@@ -146,7 +156,8 @@ h1, h2 {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
+    margin-right: 50px;
 }
 
 .language-dropdown {
@@ -472,6 +483,14 @@ h1, h2 {
 .logo {
   margin-left: -15px;
 }
+
+.nav-actions {
+    margin-right: 0px;
+}
+
+.dropdown-item {
+    font-size: 14px;
+}
 }
 
 
@@ -498,6 +517,7 @@ h1, h2 {
     color: var(--Text-Dark, #002425);
     max-width: 100%;
     word-wrap: break-word;
+    margin-right: auto;
 }
 
 .highlight {
@@ -516,10 +536,17 @@ h1, h2 {
 .cards-grid {
     background: transparent;
     display: grid;
-    grid-template-columns: repeat(3, 400px); /* 3 sabit kolon = kart genişliği */
-    gap: 12px;                                 /* gerçek boşluk */
-    justify-content: center;                   /* ortala, dış kenarlar eşit kalsın */
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 sabit kolon = kart genişliği */
+    gap: 12px;                                 /* gerçek boşluk */                  /* ortala, dış kenarlar eşit kalsın */
     width: 100%;
+    max-width: 1440px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    margin-left: -10px;
+}
+
+.cards-grid a {
+    text-decoration: none;
 }
 
 .service-card {
@@ -529,8 +556,8 @@ h1, h2 {
     background: transparent;
     border: 1px solid var(--Interface-Stroke, #D0DDDD);
     width: 100%;
-    max-width: 400px;
-    height: 250px;
+    max-width: 450px;
+    height: 100%;
     justify-content: space-between;
 }
 
@@ -1415,7 +1442,7 @@ margin-top: -6rem;
     gap: 64px;
     flex-wrap: wrap;
      margin-top: -6rem; 
-  transform: translateX(-6rem); 
+  transform: translateX(2.5rem); 
 }
 
 
@@ -1646,4 +1673,21 @@ margin-top: -6rem;
   .footer-bottom p {
     margin: 0;
   }
+}
+
+
+@media (min-width:1441px)  and  (max-width:1800px)  {
+
+.footer-links {
+        margin-right: 0px;
+    }
+}
+
+@media (min-width:1078px) and (max-width:1439px){
+
+    .footer-links {
+        margin-right: 200px;
+    }
+
+    
 }

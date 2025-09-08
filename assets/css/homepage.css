@@ -15,18 +15,23 @@ body {
     background-color: transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 h1, h2 {
     font-family: 'Encode Sans Expanded', sans-serif;
 }
 
 .navbar {
-           position: absolute;  
+           position: fixed;  
            top: 0;
            left: 0;
            width: 100%;
            background: transparent;  
            z-index: 9999;
            padding-top: 30px;
+           transition: background 0.3s ease;
         }
 
         .nav-container {
@@ -168,7 +173,10 @@ h1, h2 {
             padding: 0.75rem 1rem;
             color: white;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 18px;
+            font-style: normal;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
             transition: all 0.2s ease;
         }
 
@@ -194,7 +202,8 @@ h1, h2 {
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 16px;
+            margin-right: 25px;
         }
 
         .language-dropdown {
@@ -476,24 +485,40 @@ h1, h2 {
   margin-left: 21px;
 }
 
+.dropdown-item {
+  font-size: 14px;
+}
+
 }
 
  /* Hero Section */
-.hero-section {
+
+ .hero-section {
   width: 100%;
+  max-width: 1440px;
   height: 810px;
-  max-width: 100%;
-  background: var(--Gradient-Hero, linear-gradient(288deg, rgba(0, 36, 37, 0.24) 0%, rgba(0, 36, 37, 0.60) 100%)), 
-              url('/assets/images/baku.png') center/cover no-repeat;
-  flex-shrink: 0;
+  background: none;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start; 
   padding: 0 4rem;
-  margin: 0 auto;
-  object-fit: contain;
+  margin: 0 auto; 
   z-index: 0;
+  overflow: visible; 
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 100vw;
+  height: 100%;
+  z-index: -1; 
+  background: var(--Gradient-Hero, linear-gradient(288deg, rgba(0, 36, 37, 0.24) 0%, rgba(0, 36, 37, 0.60) 100%)),
+              url('/assets/images/baku.png') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -549,7 +574,7 @@ h1, h2 {
 .hero-button:hover {
   border: 1px solid var(--Primary-Base, #00B2BA);
 background: var(--Interface-White, #F3FBFC) ;
-color: #002425;
+color: var(--Primary-Base, #00B2BA);
 }
 
 /* Tablet Styles */
@@ -960,7 +985,7 @@ color: var(--Interface-White, #F3FBFC);
     flex-direction: column;
     padding: 56px;
     width: 100%;
-    max-width: 100%;
+    max-width: 1440px;
     margin: 0 auto;
     background-color: #F3FBFC;
     box-sizing: border-box;
@@ -1009,7 +1034,7 @@ color: var(--Interface-White, #F3FBFC);
 
 .highlight99 {
     color: var(--Primary-Base, #00B2BA);
-    font-family: 'encodesansexpanded', sans-serif;
+    font-family: 'Encode sans expanded', sans-serif;
     font-style: normal;
     font-size: 40px;
     font-weight: 500;
@@ -1057,6 +1082,10 @@ color: var(--Interface-White, #F3FBFC);
     flex-wrap: nowrap;
     justify-content: space-between;
     width: 100%;
+}
+
+.services-cards a {
+  text-decoration: none;
 }
 
 .service-card {
@@ -1188,7 +1217,7 @@ color: var(--Interface-White, #F3FBFC);
     .service-card {
         padding: 48px 24px;
         width: 100%;
-        height: 190px;
+        height: 250px;
         min-width: auto;
         max-width: none;
         justify-content: flex-start;
@@ -1272,13 +1301,16 @@ color: var(--Interface-White, #F3FBFC);
 
     /* Property Section */
 .property-section {
-    display: flex;
-    width: 100%;
-    background: #E7F2F3;
-    max-width: 100%;
-    padding: 112px 56px;
-    margin: 0 auto;
-    gap: 120px;
+  width: 100%;
+  background: #E7F2F3;
+  padding: 112px 56px;
+}
+
+.property-inner {
+  max-width: 1350px;  /* içerik genişliği sabit */
+  margin: 0 auto;     /* ortala */
+  display: flex;
+  gap: 120px;
 }
 
 .property-header {
@@ -1459,6 +1491,16 @@ color: var(--Interface-White, #F3FBFC);
     .property-header {
         width: 100%;
     }
+
+    .accordion-container {
+      width: 100%;
+      max-width: fit-content;
+      margin-left: -200px;
+    }
+
+    .accordion-icon {
+      margin-left: 100px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1474,6 +1516,17 @@ color: var(--Interface-White, #F3FBFC);
 
     .accordion-header {
         padding: 20px 0;
+    }
+
+    .accordion-container {
+      width: 100%;
+      max-width: fit-content;
+      left: 100px;
+    }
+
+    .accordion-icon {
+      margin-left: auto;
+
     }
 
     .accordion-title {
@@ -1500,6 +1553,57 @@ color: var(--Interface-White, #F3FBFC);
     .property-title {
         font-size: 24px;
     }
+
+    .accordion-container {
+      width: 100%;
+      max-width: 400px;
+      left: 100px;
+    }
+
+    .accordion-icon {
+      margin-left: auto;
+
+    }
+}
+
+
+/* ≤1024px: sütun düzenine geç, ittirme/offsetleri sıfırla */
+@media (max-width: 1024px) {
+  .property-section { padding: 80px 40px; }
+  .property-inner { flex-direction: column; gap: 40px; }
+  .property-header { width: 100%; max-width: none; }
+  .accordion-container { width: 100%; max-width: 100%; margin: 0; }
+  .accordion-header { padding: 24px 0; }
+  .accordion-title { font-size: 20px; }
+  .accordion-icon { margin-left: 0; } /* önceki 100px’i override et */
+}
+
+/* ≤768px */
+@media (max-width: 768px) {
+  .property-section { padding: 60px 24px; }
+  .property-title, .highlight88 { font-size: 28px; line-height: 1.25; }
+  .accordion-title { font-size: 18px; }
+  .accordion-content { font-size: 14px; padding-bottom: 24px; }
+  .accordion-container { width: 100%; max-width: 100%; margin: 0; }
+}
+
+/* ≤480px – 425px dâhil */
+@media (max-width: 480px) {
+  .property-section { padding: 32px 16px; }
+  .property-inner { gap: 28px; }
+  .work-process-pill3 { font-size: 14px; padding: 8px 14px; }
+  .property-title, .highlight88 { font-size: 24px; }
+  .accordion-title { font-size: 16px; padding-right: 0; }
+  .accordion-icon { margin-left: 12px; } /* artı ikon hep sağda */
+}
+
+/* ≤375px */
+@media (max-width: 375px) {
+  .property-section { padding: 24px 12px; }
+  .property-inner { gap: 24px; }
+  .property-title, .highlight88 { font-size: 22px; }
+  .accordion-title { font-size: 15px; }
+  .accordion-header { gap: 12px; }
 }
 
 /* Projects Section */
@@ -2238,15 +2342,14 @@ color: var(--Interface-White, #F3FBFC);
 
 /* Contact Section */
 .contact-section {
-    display: flex;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 112px 56px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    background-color: #F3FBFC;
+  width: 100%;
+  background-color: #F3FBFC;
+  padding: 112px 56px;
+}
+
+.contact-inner {
+  max-width: 1350px; /* içerik sabit kalır */
+  margin: 0 auto;    /* ortalar */
 }
 
 .image-container {
@@ -2470,9 +2573,11 @@ color: var(--Interface-White, #F3FBFC);
     padding: 112px 56px 56px 56px;
     gap: 6rem;
     margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
+ 
 .footer-brand {
     display: flex;
     flex-direction: column;
@@ -2526,7 +2631,7 @@ margin-top: -6rem;
     gap: 64px;
     flex-wrap: wrap;
      margin-top: -6rem; 
-  transform: translateX(-6rem); 
+  transform: translateX(2.5rem); 
 }
 
 
@@ -2828,4 +2933,9 @@ margin-top: -6rem;
   #cookie-consent[hidden] { display: none !important; }
 
 
+@media (min-width:1078px) and (max-width:1439px){
 
+    .footer-links {
+        margin-right: 200px;
+    }
+  }

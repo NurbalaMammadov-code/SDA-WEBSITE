@@ -21,9 +21,17 @@ h1 {
     font-family: 'Encode Sans Expanded', sans-serif;
 }
 
+.navbar-wrapper {
+    height: 64px; /* navbar yüksekliği kadar (64px + padding-top vs) */
+}
+
 .navbar {
     background-color: transparent;
-    position: relative; 
+     position: fixed;
+    top: 30px;
+    left: 0;
+    right: 0;
+    width: 100%;
     z-index: 2000;
 }
 
@@ -117,7 +125,6 @@ h1 {
     transition: all 0.2s ease;
     z-index: 1100;
     margin-top: 0.5rem;
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -132,11 +139,14 @@ h1 {
     padding: 0.75rem 1rem;
     color: var(--Text-Dark, #002425);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     transition: all 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
 }
 
 .dropdown-item:hover {
@@ -154,7 +164,14 @@ h1 {
 }
 
 /* 1) Menü konumunu butona yapıştır (arada boşluk kalmasın) */
-.language-dropdown { position: relative; }
+.language-dropdown { 
+  position: relative; 
+    font-size: 18px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  color: #002425;
+}
 
 .language-dropdown .dropdown-menu{
   /* sadece dil menüsü için override */
@@ -535,10 +552,17 @@ h1 {
 .insights-grid1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: 12px;
   justify-content: center;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.bb {
+  display: flex;
+  align-items: center;       /* dikeyde ortala */
+  justify-content: space-between; /* başlık sola, ikon sağa */
+  margin-top: 10px;
 }
 
 .insight-card1 {
@@ -551,10 +575,9 @@ h1 {
   font-size: 22px;
   font-weight: 500;
   color: #002425;
-  margin-top: 15px;
    position: relative;
-  left: -10px;
   text-decoration: none;
+  left: -10px;
 }
 
 .insight-card1.hidden {
@@ -565,8 +588,6 @@ h1 {
 .read-more-link1 svg {
     width: 32px;
     height: 32px;
-  margin-left: 355px;
-  margin-top: -28px;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -588,6 +609,12 @@ h1 {
 .insight-card1 .card-image1:focus-within ~ .read-more-link1 svg {
   transform: rotate(45deg);
 }
+
+/* Kartın üzerine gelince oku döndür */
+.insight-card1:hover .read-more-link1 svg {
+  transform: rotate(45deg);
+}
+
 
 .card-image1 {
   width: 435.394px;
@@ -614,7 +641,7 @@ h1 {
     color: var(--Interface-White, #F3FBFC);
     border: none;
     font-style: normal;
-    font-family: 'montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     padding: 14px 28px;
     font-weight: 600;
@@ -676,8 +703,8 @@ h1 {
 /* Contact Section */
 .contact-section {
     display: flex;
-    width: 1440px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1490px;
     margin: 0 auto;
     padding: 112px 56px;
     flex-direction: column;
@@ -890,7 +917,6 @@ h1 {
     padding: 4rem 0 3rem;
     margin: 0 auto;
     box-sizing: border-box;
-
 }
 
 .footer-content {
@@ -901,6 +927,8 @@ h1 {
     padding: 112px 56px 56px 56px;
     gap: 6rem;
     margin-bottom: 3rem;
+     margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -1342,24 +1370,20 @@ margin-top: -6rem;
   }
 }
 
-
-        
-
-
 /* 1440px için düzenleme */
-@media (min-width: 1400px) and (max-width: 1500px) {
+@media (min-width: 1400px) and (max-width: 2560px) {
 
   .insights-grid1 {
    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 2rem ;
     justify-items: center;
     max-width: 100%;
     overflow: visible; /* iç scroll oluşmasın diye */
   }
 
   .insight-card1 {
-    max-width: 435px;
+    max-width: 100%;
     overflow: visible; /* kartlar taşmasın diye */
   }
 
@@ -1368,14 +1392,19 @@ margin-top: -6rem;
     max-width: 435px; /* mevcut kart genişliği ile sınırla */
   }
 
- 
-
-  .read-more-link1 svg {
-    margin-left: 0; 
-    position: absolute;
-    bottom: -3px;
-    right: 0px; /* sağ alt köşeye sabitler */
+  .logo {
+    margin-left: -20px;
   }
+
+  .footer-links {
+        margin-right: -150px;
+    }
+
+    .footer-content {
+  display: flex;
+  gap: 100px; 
+}
+
 }
 
 

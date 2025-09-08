@@ -20,9 +20,17 @@ h1 {
     font-family: 'Encode Sans Expanded', sans-serif;
 }
 
+.navbar-wrapper {
+    height: 64px; /* navbar yüksekliği kadar (64px + padding-top vs) */
+}
+
 .navbar {
     background-color: transparent;
-    position: relative; 
+     position: fixed;
+    top: 30px;
+    left: 0;
+    right: 0;
+    width: 100%;
     z-index: 2000;
 }
 
@@ -116,7 +124,6 @@ h1 {
     transition: all 0.2s ease;
     z-index: 1100;
     margin-top: 0.5rem;
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -131,7 +138,10 @@ h1 {
     padding: 0.75rem 1rem;
     color: var(--Text-Dark, #002425);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 18px;
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     transition: all 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
@@ -145,7 +155,8 @@ h1 {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
+    margin-right: 25px;
 }
 
 .language-dropdown {
@@ -452,6 +463,14 @@ h1 {
             .nav-link {
                 font-size: 14px;
             }
+
+            .language-btn {
+                font-size: 14px;
+            }
+
+            .dropdown-item {
+                font-size: 14px;
+            }
         }
 
 
@@ -592,8 +611,8 @@ h1 {
 
 .main-image {
     width: 1328.452px;
-    height: 873px;
-    aspect-ratio: 1328.45/873.00;
+    height: 600px;
+    aspect-ratio: 1328.45/600.00;
     object-fit: cover;
     max-width: 100%;
     height: auto;
@@ -1313,6 +1332,8 @@ h1 {
     padding: 112px 56px 56px 56px;
     gap: 6rem;
     margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -1369,7 +1390,7 @@ margin-top: -6rem;
     gap: 64px;
     flex-wrap: wrap;
      margin-top: -6rem; 
-  transform: translateX(-6rem); 
+  transform: translateX(2.5rem); 
 }
 
 
@@ -1397,7 +1418,7 @@ margin-top: -6rem;
 .footer-column1 ul {
     list-style: none;
     width: 110%;
-}
+} 
 
 .footer-column1 ul li {
     margin-bottom: 1.5rem;

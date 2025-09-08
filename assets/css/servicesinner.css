@@ -21,9 +21,17 @@ h1 {
     font-family: 'Encode Sans Expanded', sans-serif;
 }
 
+.navbar-wrapper {
+    height: 64px; /* navbar yüksekliği kadar (64px + padding-top vs) */
+}
+
 .navbar {
     background-color: transparent;
-    position: relative; 
+     position: fixed;
+    top: 30px;
+    left: 0;
+    right: 0;
+    width: 100%;
     z-index: 2000;
 }
 
@@ -117,7 +125,6 @@ h1 {
     transition: all 0.2s ease;
     z-index: 1100;
     margin-top: 0.5rem;
-    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -132,7 +139,10 @@ h1 {
     padding: 0.75rem 1rem;
     color: var(--Text-Dark, #002425);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 18px;
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     transition: all 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
@@ -146,7 +156,8 @@ h1 {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
+    margin-right: 25px;
 }
 
 .language-dropdown {
@@ -154,7 +165,9 @@ h1 {
 }
 
 /* 1) Menü konumunu butona yapıştır (arada boşluk kalmasın) */
-.language-dropdown { position: relative; }
+.language-dropdown { 
+    position: relative;
+}
 
 .language-dropdown .dropdown-menu{
   /* sadece dil menüsü için override */
@@ -163,10 +176,8 @@ h1 {
   top: calc(100% - 1px);     /* 1px üst üste bindir → birleşik görünüm */
   transform: none;
   margin-top: 0;
-
   width: 100%;               /* buton genişliği kadar */
   min-width: unset;
-
   border-radius: 0 0 8px 8px;       /* üst köşeleri sıfırla */
   border: 1px solid #D0DDDD;        /* senin rengi */
   background: transparent;            /* senin rengi */
@@ -458,6 +469,10 @@ h1 {
             }
             
             .language-btn {
+                font-size: 14px;
+            }
+
+            .dropdown-item {
                 font-size: 14px;
             }
         }
@@ -817,6 +832,8 @@ h1 {
     justify-content: center;
     padding: 40px 20px;
     background-color: #E7F2F3;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container9 {
@@ -869,7 +886,8 @@ h1 {
     line-height: 125%;
     color:  var(--Text-Dark, #002425);
     margin: 0;
-    max-width: 880px;
+    max-width:  100%;
+    margin-left: 0px;
 }
 
 .highlight {
@@ -879,7 +897,7 @@ h1 {
 .benefits-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 112px;
+    gap: 80px;
     margin-left: 200px;
 }
 
@@ -888,7 +906,13 @@ h1 {
     flex-direction: column;
     gap: 16px;
     margin-left: 100px;
-    
+}
+
+.benefit-item1 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-left: 100px;
 }
 
 .benefit-title {
@@ -993,11 +1017,15 @@ h1 {
     .main-heading {
         font-family: 'encode-sans-expanded', sans-serif;
         font-style: normal;
-        font-size: 36px;
+        font-size: 32px;
         line-height: 1.2;
         width: 100%;
         text-align: left;
         margin-left: 60px;
+    }
+
+    .section-header h2 {
+        font-size: 36px;
     }
 
     .benefits-grid {
@@ -1008,6 +1036,11 @@ h1 {
     }
 
     .benefit-item {
+        gap: 12px;
+        margin-left: 0;
+    }
+
+    .benefit-item1 {
         gap: 12px;
         margin-left: 0;
     }
@@ -1042,13 +1075,18 @@ h1 {
         font-family: 'encode-sans-expanded', sans-serif;
         font-style: normal;
         font-weight: 500;
-        width: 120%;
+        width: 410px;
         line-height: 1.2;
-        font-size: 24px;
+        font-size: 28px;
         margin-left: -50px;
     }
 
     .benefit-item{
+        margin-left: -180px;
+        overflow: visible;
+    }
+
+     .benefit-item1{
         margin-left: -180px;
         overflow: visible;
     }
@@ -1064,6 +1102,13 @@ h1 {
     .benefit-description {
         width: 300px;
         font-size: 14px;
+    }
+}
+
+@media (max-width: 375px) {
+    .main-heading {
+        font-size: 22px;
+        width: 350px;
     }
 }
 
@@ -1108,9 +1153,8 @@ h1 {
 }
 
 .process-card {
-     display: flex;               /* yatay hizalama için */
-    align-items: flex-start;     /* yazılar rakamın üst hizasından başlasın */
-    gap: 48px;                   /* rakam ile yazılar arası boşluk */
+     display: flex;                 
+    gap: 48px;                   
     width: 100%;
     max-width: 680px;
     padding: 28px;
@@ -1118,11 +1162,48 @@ h1 {
     box-sizing: border-box;
 }
 
+.process-card1 {
+     display: flex;              
+    align-items: flex-start;     
+    gap: 48px;                   
+    width: 100%;
+    max-width: 680px;
+    padding: 28px;
+    background: #E7F2F3;
+    box-sizing: border-box;
+}
+
+.step-number1 {
+    font-size: 48px;
+    font-weight: 400;
+    color: var(--Primary-Base, #00B2BA);
+    flex-shrink: 0;            
+    margin-bottom: 0;
+}
+
+.process-content1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.process-card1 h3 {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--Text-Dark, #002425);
+}
+
+.process-card1 p {
+    font-size: 14px;
+    color: var(--Text-Medium, #455E5F);
+    line-height: 1.6;
+}
+
 .step-number {
     font-size: 48px;
     font-weight: 400;
     color: var(--Primary-Base, #00B2BA);
-    flex-shrink: 0;              /* küçülüp kaymasın */
+    flex-shrink: 0;            
     margin-bottom: 0;
 }
 
@@ -1763,7 +1844,6 @@ h1 {
     padding: 4rem 0 3rem;
     margin: 0 auto;
     box-sizing: border-box;
-
 }
 
 .footer-content {
@@ -1774,6 +1854,8 @@ h1 {
     padding: 112px 56px 56px 56px;
     gap: 6rem;
     margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -1781,7 +1863,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 24px;
 }
 
 .footer-logo img {
@@ -1802,7 +1884,7 @@ margin-top: -6rem;
 
 .social-links2 {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
     margin-top: -0.5rem;
 }
 
@@ -1830,7 +1912,7 @@ margin-top: -6rem;
     gap: 64px;
     flex-wrap: wrap;
      margin-top: -6rem; 
-  transform: translateX(-6rem); 
+  transform: translateX(2.5rem); 
 }
 
 
@@ -2065,3 +2147,81 @@ margin-top: -6rem;
 
 
 
+@media (max-width:1800px) and (min-width:1441px) {
+  
+    .main-heading {
+        margin-left: 145px;
+        width: 880px;
+    }
+
+    .benefit-title {
+        margin-left: auto;
+    }
+
+    .benefit-description {
+        margin-left: auto;
+    }
+
+    .benefit-item1 {
+        margin-right: -140px;
+    }
+
+    .work-process-pill {
+        margin-left: auto;
+    }
+
+    .process-heading {
+        margin-left: -100px;
+        width: 100%;
+    }
+
+    .process-grid {
+        column-gap: 12px;  /* sadece sağ-sol (yan yana) kartlar arası */
+    }
+
+    .process-card {
+        width: 600px;
+        margin-left: 110px;
+    }
+
+    .process-card1 {
+        width: 600px;
+        margin-left: -100px;
+    }
+
+    .footer-brand {
+        margin-left:  0px;
+    }
+
+
+    .footer-links {
+        margin-right: 0px;
+    }
+
+   }
+
+
+   @media (min-width:1078px) and (max-width:1439px){
+
+    .footer-links {
+        margin-right: 200px;
+    }
+
+    .main-heading {
+        width: 880px;
+        margin-left: 20px;
+    }
+
+    .benefit-item {
+        margin-left: auto;
+    }
+
+    .benefit-item1 {
+        margin-left: 120px;
+    }
+
+    .section-header h2 {
+        width: 877px;
+        max-width: 100%;
+    }
+}
