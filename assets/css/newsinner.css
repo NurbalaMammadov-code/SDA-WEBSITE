@@ -21,17 +21,22 @@ h1 {
 }
 
 .navbar-wrapper {
-    height: 64px; /* navbar yüksekliği kadar (64px + padding-top vs) */
+        height: calc(64px + 30px); /* nav yüksekliği + boşluk */
+    background-color: #F3FBFC; /* navbar ile aynı renk */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1999;
 }
 
 .navbar {
-    background-color: transparent;
-     position: fixed;
-    top: 30px;
+     background-color: transparent; /* rengi wrapper aldı */
+    position: absolute;            /* wrapper içinde konumlanacak */
+    top: 30px;                     /* wrapper içinde 30px aşağıdan başla */
     left: 0;
     right: 0;
-    width: 100%;
-    z-index: 2000;
+    height: 64px;
 }
 
 .nav-container {
@@ -486,7 +491,7 @@ h1 {
 .content {
     display: flex;
     flex-direction: column;
-    padding: 84px 56px 56px 56px;
+    padding: 114px 56px 56px 56px;
     width: 1440px;
     max-width: 100%;
     background-color: #F3FBFC;
@@ -1485,19 +1490,25 @@ margin-top: -6rem;
     display: flex;
     justify-content: space-between;
     padding-top: 2rem 56px 0 56px;
+    margin: 0 auto;
+    max-width: 1440px;
     font-size: 0.9rem;
     color: var(--Interface-Stroke, #D0DDDD);
-    margin-right: 3rem;
 }
 
 .footer-bottom p {
     margin-left: 2.9rem;
 }
 
-.footer-bottom a {
+.footer-bottom p a {
     color: inherit;      
     border-bottom: 1px solid white;
     text-decoration: none;
+    margin-left: 0px;
+}
+
+.ff {
+    margin-right: 50px;
 }
 
 
@@ -1621,6 +1632,19 @@ margin-top: -6rem;
   .footer-bottom p {
     margin: 0;
   }
+} 
+
+@media (max-width:375px) {
+
+    .container9 {
+        margin-left: -25px;
+    }
 }
 
 
+@media (min-width:1078px) and (max-width:1439px){
+
+    .footer-links {
+        margin-right: 200px;
+    }
+}

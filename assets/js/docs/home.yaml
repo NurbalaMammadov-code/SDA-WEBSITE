@@ -1,0 +1,71 @@
+paths:
+  /api/v1/homepage:
+    get:
+      tags: [Homepage]
+      summary: Homepage məzmunu (hero, about teaser, seçilmiş listlər)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomepagePayload'
+
+  /api/v1/property-sectors:
+    get:
+      tags: [Properties]
+      summary: Property sektorları (accordion üçün)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: sort
+          in: query
+          schema: { type: string, enum: [order_asc, order_desc, title_asc, title_desc], default: order_asc }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PropertySector' }
+
+components:
+  schemas:
+    HomepagePayload:
+      type: object
+      properties:
+        hero:
+          type: object
+          properties:
+            title: { type: string }
+            description: { type: string }
+            button_label: { type: string }
+            button_href: { type: string }
+            background_image_url: { type: string }
+            overlay_opacity: { type: number }
+        about_teaser:
+          type: object
+          properties:
+            title_html: { type: string }
+            description_html: { type: string }
+            image_url: { type: string }
+            cta_href: { type: string }
+        featured_services:
+          type: array
+          items: { $ref: '#/components/schemas/Service' }
+        featured_projects:
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+
+    PropertySector:
+      type: object
+      properties:
+        slug: { type: string }
+        title: { type: string }
+        body_html: { type: string }
+        learn_more_href: { type: string }
+        order: { type: integer }

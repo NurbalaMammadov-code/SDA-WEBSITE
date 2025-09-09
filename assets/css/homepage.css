@@ -34,6 +34,20 @@ h1, h2 {
            transition: background 0.3s ease;
         }
 
+        .navbar.on-about {
+  background: #F3FBFC;         /* yarı saydam koyu zemin */               
+}
+
+.navbar.on-about .nav-link {
+  color: #002425;
+}
+
+.navbar.on-about .nav-link:hover {
+  color: (#455E5F);
+}
+
+
+
         .nav-container {
             background: transparent;
             max-width: 1440px;
@@ -152,14 +166,15 @@ h1, h2 {
             left: 50%;
             transform: translateX(-50%);
             background-color: #ffffff;
-            min-width: 220px;
+            min-width: 300px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             opacity: 0;
             visibility: hidden;
             transform: translateX(-50%) translateY(-10px);
             transition: all 0.2s ease;
-            z-index: 9999;
+            z-index: 1100;
             margin-top: 0.5rem;
+            overflow: hidden;
         }
 
         .dropdown-menu1.active {
@@ -185,12 +200,15 @@ h1, h2 {
             color: #059669;
         }
 
-        .dropdown-item1 {
+       .dropdown-item1 {
             display: block;
-            padding: 0.75rem 1rem;
+            padding: 16px 16px;
             color: #002425;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 18px;
+            font-style: normal;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
             transition: all 0.2s ease;
         }
 
@@ -1480,91 +1498,7 @@ color: var(--Interface-White, #F3FBFC);
 }
   
 
-@media (max-width: 1024px) {
 
-     .property-section {
-        padding: 80px 40px;
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .property-header {
-        width: 100%;
-    }
-
-    .accordion-container {
-      width: 100%;
-      max-width: fit-content;
-      margin-left: -200px;
-    }
-
-    .accordion-icon {
-      margin-left: 100px;
-    }
-}
-
-@media (max-width: 768px) {
-     
-     .property-section {
-        padding: 60px 24px;
-        gap: 32px;
-    }
-
-    .property-title {
-        font-size: 28px;
-    }
-
-    .accordion-header {
-        padding: 20px 0;
-    }
-
-    .accordion-container {
-      width: 100%;
-      max-width: fit-content;
-      left: 100px;
-    }
-
-    .accordion-icon {
-      margin-left: auto;
-
-    }
-
-    .accordion-title {
-        font-size: 16px;
-        padding-right: 20px;
-    }
-
-    .accordion-content {
-        padding: 0 0 24px 0;
-        font-size: 14px;
-    }
-
-    .highlight88 {
-        font-size: 28px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .property-section {
-        padding: 48px 20px;
-    }
-
-    .property-title {
-        font-size: 24px;
-    }
-
-    .accordion-container {
-      width: 100%;
-      max-width: 400px;
-      left: 100px;
-    }
-
-    .accordion-icon {
-      margin-left: auto;
-
-    }
-}
 
 
 /* ≤1024px: sütun düzenine geç, ittirme/offsetleri sıfırla */
@@ -2338,6 +2272,10 @@ color: var(--Interface-White, #F3FBFC);
     .insights-left h1 {
         font-size: 23px;
     }
+
+    .container9 {
+      margin-left: -25px;
+    }
 }
 
 /* Contact Section */
@@ -2348,7 +2286,7 @@ color: var(--Interface-White, #F3FBFC);
 }
 
 .contact-inner {
-  max-width: 1350px; /* içerik sabit kalır */
+  max-width: 1335px; /* içerik sabit kalır */
   margin: 0 auto;    /* ortalar */
 }
 
@@ -2728,17 +2666,23 @@ margin-top: -6rem;
     padding-top: 2rem 56px 0 56px;
     font-size: 0.9rem;
     color: var(--Interface-Stroke, #D0DDDD);
-    margin-right: 3rem;
+     max-width: 1440px;  
+    margin: 0 auto; 
 }
 
 .footer-bottom p {
-    margin-left: 2.9rem;
+    margin-left: 50px;
 }
 
-.footer-bottom a {
+.footer-bottom  p a {
     color: inherit;      
     border-bottom: 1px solid white;
     text-decoration: none;
+    margin-left: 0px;
+}
+
+.ff {
+  margin-right: 50px;
 }
 
 

@@ -151,3 +151,41 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'Escape') root.hidden = true;
     });
   })();
+
+
+
+  (function () {
+    const navbar = document.querySelector('.navbar');
+    const about  = document.querySelector('#about');
+    if (!navbar || !about) return;
+
+    function getTriggerY() {
+      const navHeight = navbar.getBoundingClientRect().height;
+      // About'un sayfa üstünden mutlak konumu:
+      const aboutTop = about.getBoundingClientRect().top + window.scrollY;
+      // Tetik: About üst kenarı navbarın altına geldiğinde
+      return aboutTop - navHeight;
+    }
+
+    let triggerY = 0;
+
+    function updateTrigger() {
+      triggerY = Math.max(0, Math.floor(getTriggerY()));
+      onScroll(); // boyut değişince sınıfı hemen doğru hale getir
+    }
+
+    function onScroll() {
+      if (window.scrollY >= triggerY) {
+        navbar.classList.add('on-about');
+      } else {
+        navbar.classList.remove('on-about');
+      }
+    }
+
+    // ilk hesaplama + olaylar
+    updateTrigger();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateTrigger);
+  })();
+
+

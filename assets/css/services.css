@@ -22,17 +22,22 @@ h1, h2 {
 }
 
 .navbar-wrapper {
-    height: 64px; /* navbar yüksekliği kadar (64px + padding-top vs) */
+        height: calc(64px + 30px); /* nav yüksekliği + boşluk */
+    background-color: #F3FBFC; /* navbar ile aynı renk */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1999;
 }
 
 .navbar {
-    background-color: transparent;
-     position: fixed;
-    top: 30px;
+     background-color: transparent; /* rengi wrapper aldı */
+    position: absolute;            /* wrapper içinde konumlanacak */
+    top: 30px;                     /* wrapper içinde 30px aşağıdan başla */
     left: 0;
     right: 0;
-    width: 100%;
-    z-index: 2000;
+    height: 64px;
 }
 
 .nav-container {
@@ -506,7 +511,7 @@ h1, h2 {
     display: flex;
     width: 100%;
     max-width: 1440px;
-    padding: 84px 56px 56px 56px;
+    padding: 114px 56px 56px 56px;
     margin: 0 auto;
 }
 
@@ -714,7 +719,7 @@ h1, h2 {
 .accordion-icon svg {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -20px;
     transition: opacity 0.3s ease;
 }
 
@@ -1140,8 +1145,8 @@ h1, h2 {
 /* Contact Section */
 .contact-section {
     display: flex;
-    width: 1440px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1440px;
     margin: 0 auto;
     padding: 112px 56px;
     flex-direction: column;
@@ -1149,9 +1154,10 @@ h1, h2 {
     gap: 10px;
 }
 
-.image-container {
+.image-container { 
     position: relative;
     width: 100%;
+    max-width: 1303px;
 }
 
 .contact-image {
@@ -1690,4 +1696,12 @@ margin-top: -6rem;
     }
 
     
+}
+
+
+@media (max-width:375px) {
+
+    .container9 {
+        margin-left: -25px;
+    }
 }

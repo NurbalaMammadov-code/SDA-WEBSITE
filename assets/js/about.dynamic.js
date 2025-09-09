@@ -71,3 +71,28 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+async function renderAboutIntroAndHero() {
+  const introEl = document.querySelector('.intro-text');
+  const imgEl = document.querySelector('.main-image');
+  const aboutList = await listAbout({ limit: 1 });
+  const about = (aboutList && aboutList[0]) || null;
+  if (!about) return;
+
+  // intro_html HTML formatında gəlir (OpenAPI-də belə tanımladım)
+  if (about.intro_html && introEl) {
+    introEl.innerHTML = about.intro_html;
+  }
+  if (about.hero_image_url && imgEl) {
+    imgEl.src = toAbsolute(about.hero_image_url);
+    imgEl.alt = 'About hero';
+  }
+}
+
+await Promise.all([
+  renderAboutStats(),
+  renderPartners(),
+  renderTeam(),
+  renderAboutIntroAndHero(),
+]);
+

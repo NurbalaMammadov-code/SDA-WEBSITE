@@ -1,20 +1,41 @@
-import { api } from "./api.js";
+// /assets/js/contactApi.js
+import { request } from '/assets/js/apiClient.js';
 
-function splitFullName(fullName) {
-  const parts = (fullName || "").trim().split(/\s+/);
-  if (parts.length <= 1) return { first_name: parts[0] || "", last_name: "-" };
-  return { first_name: parts[0], last_name: parts.slice(1).join(" ") };
-}
+export const getContactSettings = (params = {}) =>
+  request('/api/v1/contact/settings', { params });
 
-// POST /api/v1/contact-messages  (multipart)
-export function submitContact({ fullName, phone, email, message="", cvFile=null }) {
-  const { first_name, last_name } = splitFullName(fullName);
+// JSON body ile gönderim (OpenAPI şemasına uygun)
+export const submitContact = ({
+  name,
+  email,
+  phone = null,
+  subject = null,
+  message,
+  consent = null,
+  recaptcha_token = null,
+  honeypot = null,
+}) =>
+  request('/api/v1/contact/messages', {
+    method: 'POST',
+    body: {
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      consent,
+      recaptcha_token,
+      honeypot,
+    },
+  });
+
+
+
+export const submitContactFormData = (payload) => {
   const fd = new FormData();
-  fd.append("first_name", first_name);
-  fd.append("last_name",  last_name);
-  fd.append("phone_number", phone);
-  fd.append("email", email);
-  if (message) fd.append("message", message);
-  if (cvFile)  fd.append("cv", cvFile);
-  return api.post("/api/v1/contact-messages", fd);
-}
+  Object.entries(payload || {}).forEach(([k, v]) => {
+    if (v !== undefined && v !== null) fd.append(k, v);
+  });
+  return request('/api/v1/contact/messages', { method: 'POST', body: fd });
+};
+

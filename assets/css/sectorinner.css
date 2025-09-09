@@ -4,7 +4,7 @@
             box-sizing: border-box;
         }
 
-        html, body {
+        html, body { 
           height: 100%;
   overflow-x: hidden;
   background-color: #F3FBFC;
@@ -22,17 +22,22 @@
 }
 
 .navbar-wrapper {
-    height: 64px; /* navbar yüksekliği kadar (64px + padding-top vs) */
+        height: calc(64px + 30px); /* nav yüksekliği + boşluk */
+    background-color: #F3FBFC; /* navbar ile aynı renk */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1999;
 }
 
 .navbar {
-    background-color: transparent;
-     position: fixed;
-    top: 30px;
+     background-color: transparent; /* rengi wrapper aldı */
+    position: absolute;            /* wrapper içinde konumlanacak */
+    top: 30px;                     /* wrapper içinde 30px aşağıdan başla */
     left: 0;
     right: 0;
-    width: 100%;
-    z-index: 2000;
+    height: 64px;
 }
 
 .nav-container {
@@ -485,7 +490,7 @@
         /* Hero Section */
 .hero {
     background: transparent;
-    padding: 84px 56px;
+    padding: 114px 84px 56px 56px;
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
@@ -529,8 +534,6 @@
     background: transparent;
     padding: 2rem;
     border: 1px solid var(--Interface-Stroke, #D0DDDD);
-    
-    
 }
 
 
@@ -1676,19 +1679,25 @@ margin-top: -6rem;
     display: flex;
     justify-content: space-between;
     padding-top: 2rem 56px 0 56px;
+    margin: 0 auto;
+    max-width: 1440px;
     font-size: 0.9rem;
     color: var(--Interface-Stroke, #D0DDDD);
-    margin-right: 3rem;
 }
 
 .footer-bottom p {
     margin-left: 2.9rem;
 }
 
-.footer-bottom a {
+.footer-bottom p a {
     color: inherit;      
     border-bottom: 1px solid white;
     text-decoration: none;
+    margin-left: 0;
+}
+
+.ff {
+  margin-right: 50px;
 }
 
 

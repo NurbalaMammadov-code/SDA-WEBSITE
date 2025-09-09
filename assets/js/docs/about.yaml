@@ -1,0 +1,998 @@
+openapi: 3.1.0
+info:
+  title: SDA Website Content API – About + Nav/Services/Projects/News/Contact (v1.1)
+  version: 1.1.0
+  description: |
+    Front-end-in tam dinamik işləməsi üçün lazım olan endpoint-lərin yekun OpenAPI 3.1 təsviri.
+    Bu sənəd **About**, **Navigation (Header/Footer + Language)**, **Services**, **Projects**, **News** və **Contact form** bölmələrini əhatə edir.
+servers:
+  - url: http://153.92.223.91:8000
+    description: Production (Swagger UI: /docs)
+  - url: http://localhost:8000
+    description: Development
+
+paths:
+  # ───────────────────────────────── Navigation / Languages ─────────────────────────────
+  /api/v1/navigation:
+    get:
+      tags: [Navigation]
+      summary: Header & Footer menyuları, sosial linklər və dil siyahısı
+      parameters:
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NavigationPayload' }
+              examples:
+                default:
+                  value:
+                    header:
+                      items:
+                        - label: "About us"
+                          href: "/about/about.html"
+                        - label: "Services"
+                          children:
+                            - label: "Property development consulting"
+                              href: "/services inner page/servicesinner.html"
+                            - label: "Property leasing & sales"
+                              href: "/services inner page/servicesinner.html"
+                            - label: "Market research & analytics"
+                              href: "/services inner page/servicesinner.html"
+                        - label: "Projects"
+                          href: "/projects/projects.html"
+                        - label: "Properties"
+                          children:
+                            - label: "Shopping malls"
+                              href: "/property inner page/sectorinner.html"
+                            - label: "Residential buildings"
+                              href: "/property inner page/sectorinner.html"
+                            - label: "Commercial buildings"
+                              href: "/property inner page/sectorinner.html"
+                        - label: "News"
+                          href: "/news/news.html"
+                    footer:
+                      columns:
+                        - title: "Company"
+                          items:
+                            - { label: "About us", href: "/about/about.html" }
+                            - { label: "Career", href: "/join our team/joinour.html" }
+                            - { label: "Blog", href: "/news page/news.html" }
+                            - { label: "Contacts", href: "/contacts/contacts.html" }
+                            - { label: "Privacy Policy", href: "/privacy policy/privacy.html" }
+                        - title: "Property types"
+                          items:
+                            - { label: "Shopping malls", href: "/property inner page/sectorinner.html" }
+                            - { label: "Residential buildings", href: "/property inner page/sectorinner.html" }
+                            - { label: "Multifunctional buildings", href: "/property inner page/sectorinner.html" }
+                            - { label: "Retail & Commercial buildings", href: "/property inner page/sectorinner.html" }
+                            - { label: "Office buildings", href: "/property inner page/sectorinner.html" }
+                        - title: "Services"
+                          items:
+                            - { label: "Property development consulting", href: "/Services/services.html" }
+                            - { label: "Property leasing & sales", href: "/Services/services.html" }
+                            - { label: "Market research & analytics", href: "/services inner page/servicesinner.html" }
+                            - { label: "Property marketing strategy", href: "/services inner page/servicesinner.html" }
+                    socials:
+                      instagram: "https://instagram.com/yourpage"
+                      facebook: "https://facebook.com/yourpage"
+                      linkedin: "https://linkedin.com/company/yourpage"
+                    languages:
+                      - { code: "EN", label: "English", is_default: true }
+                      - { code: "AZ", label: "Azerbaijani" }
+                      - { code: "RU", label: "Russian" }
+
+  /api/v1/locales:
+    get:
+      tags: [Navigation]
+      summary: Dəstəklənən dillər
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Locale' }
+
+  # ───────────────────────────────── Services ──────────────────────────────────────────
+  /api/v1/services:
+    get:
+      tags: [Services]
+      summary: Xidmət siyahısı (sayfalanmış)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: category
+          in: query
+          schema: { type: string, nullable: true }
+        - name: sort
+          in: query
+          schema: { type: string, enum: [created_desc, created_asc, title_asc, title_desc], default: created_desc }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaginatedServices' }
+  /api/v1/services/{slug}:
+    get:
+      tags: [Services]
+      summary: Xidmət detalları
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ServiceDetail' } } } }
+        '404': { description: Tapılmadı }
+
+  # ───────────────────────────────── Projects ─────────────────────────────────────────
+  /api/v1/projects:
+    get:
+      tags: [Projects]
+      summary: Layihə siyahısı (sayfalanmış)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: property_type
+          in: query
+          schema: { type: string, nullable: true, description: 'məs: mall, residential, commercial, office' }
+        - name: status
+          in: query
+          schema: { type: string, nullable: true, description: 'məs: ongoing, completed, planned' }
+        - name: sort
+          in: query
+          schema: { type: string, enum: [created_desc, created_asc, title_asc, title_desc, start_desc, start_asc], default: created_desc }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaginatedProjects' }
+  /api/v1/projects/{slug}:
+    get:
+      tags: [Projects]
+      summary: Layihə detalları
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ProjectDetail' } } } }
+        '404': { description: Tapılmadı }
+
+  # ───────────────────────────────── News / Blog ──────────────────────────────────────
+  /api/v1/posts:
+    get:
+      tags: [News]
+      summary: Xəbər / Bloq yazıları siyahısı
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: sort
+          in: query
+          schema: { type: string, enum: [published_desc, published_asc, title_asc, title_desc], default: published_desc }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/PaginatedPosts' } } } }
+  /api/v1/posts/{slug}:
+    get:
+      tags: [News]
+      summary: Xəbər / Bloq yazısı detalları
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/PostDetail' } } } }
+        '404': { description: Tapılmadı }
+
+  # ───────────────────────────────── Contact ──────────────────────────────────────────
+  /api/v1/contact/settings:
+    get:
+      tags: [Contact]
+      summary: Əlaqə məlumatları (address, email, phone, map və s.)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ContactSettings' } } } }
+  /api/v1/contact/messages:
+    post:
+      tags: [Contact]
+      summary: Əlaqə formu göndərişi
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ContactMessageCreate' }
+            examples:
+              default:
+                value:
+                  name: "John Doe"
+                  email: "john@example.com"
+                  phone: "+994501234567"
+                  subject: "Partnership"
+                  message: "We would like to become a partner."
+                  consent: true
+                  recaptcha_token: "<token>"
+      responses:
+        '201':
+          description: Yaradıldı
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContactMessageResult' }
+        '400': { description: Yanlış sorğu }
+
+  # ───────────────────────────────── About (mövcud) ───────────────────────────────────
+  /api/v1/about:
+    get:
+      tags: [About]
+      summary: About elementləri (istatistik, intro, hero və s.)
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/AboutItem' }
+
+components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+    offset:
+      name: offset
+      in: query
+      schema: { type: integer, minimum: 0, default: 0 }
+    locale:
+      name: locale
+      in: query
+      description: Məsələn EN, AZ, RU
+      schema: { type: string, nullable: true }
+    q:
+      name: q
+      in: query
+      description: Axtarış sözü
+      schema: { type: string, nullable: true }
+
+  schemas:
+    # ── Navigation
+    Locale:
+      type: object
+      required: [code, label]
+      properties:
+        code: { type: string }
+        label: { type: string }
+        is_default: { type: boolean, nullable: true }
+    MenuItem:
+      type: object
+      required: [label]
+      properties:
+        label: { type: string }
+        href: { type: string, nullable: true }
+        external: { type: boolean, nullable: true }
+        children:
+          type: array
+          items: { $ref: '#/components/schemas/MenuItem' }
+    Menu:
+      type: object
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/MenuItem' }
+        columns:
+          type: array
+          items:
+            type: object
+            properties:
+              title: { type: string }
+              items:
+                type: array
+                items: { $ref: '#/components/schemas/MenuItem' }
+    SocialLinks:
+      type: object
+      additionalProperties: true
+      properties:
+        instagram: { type: string, nullable: true }
+        facebook: { type: string, nullable: true }
+        linkedin: { type: string, nullable: true }
+        twitter: { type: string, nullable: true }
+    NavigationPayload:
+      type: object
+      properties:
+        header: { $ref: '#/components/schemas/Menu' }
+        footer: { $ref: '#/components/schemas/Menu' }
+        languages:
+          type: array
+          items: { $ref: '#/components/schemas/Locale' }
+        socials: { $ref: '#/components/schemas/SocialLinks' }
+
+    # ── Shared / Media
+    ImageAsset:
+      type: object
+      properties:
+        url: { type: string }
+        alt: { type: string, nullable: true }
+        width: { type: integer, nullable: true }
+        height: { type: integer, nullable: true }
+    Tag:
+      type: object
+      properties:
+        slug: { type: string }
+        title: { type: string }
+    Category:
+      type: object
+      properties:
+        slug: { type: string }
+        title: { type: string }
+
+    # ── Services
+    Service:
+      type: object
+      required: [id, slug, title]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        title: { type: string }
+        excerpt: { type: string, nullable: true }
+        cover_image_url: { type: string, nullable: true }
+        category: { $ref: '#/components/schemas/Category' }
+        is_featured: { type: boolean, nullable: true }
+        created_at: { type: string, format: date-time, nullable: true }
+    ServiceDetail:
+      allOf:
+        - $ref: '#/components/schemas/Service'
+        - type: object
+          properties:
+            content_html: { type: string, nullable: true }
+            gallery:
+              type: array
+              items: { $ref: '#/components/schemas/ImageAsset' }
+    PaginatedServices:
+      type: object
+      properties:
+        total: { type: integer }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Service' }
+
+    # ── Projects
+    Project:
+      type: object
+      required: [id, slug, title]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        title: { type: string }
+        summary: { type: string, nullable: true }
+        cover_image_url: { type: string, nullable: true }
+        property_type: { type: string, nullable: true }
+        location: { type: string, nullable: true }
+        status: { type: string, nullable: true }
+        start_date: { type: string, format: date, nullable: true }
+        end_date: { type: string, format: date, nullable: true }
+        created_at: { type: string, format: date-time, nullable: true }
+    ProjectDetail:
+      allOf:
+        - $ref: '#/components/schemas/Project'
+        - type: object
+          properties:
+            description_html: { type: string, nullable: true }
+            metrics:
+              type: object
+              additionalProperties: true
+              description: "Məs: area_m2, floors, cost, client və s."
+            gallery:
+              type: array
+              items: { $ref: '#/components/schemas/ImageAsset' }
+    PaginatedProjects:
+      type: object
+      properties:
+        total: { type: integer }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+
+    # ── News / Blog
+    Post:
+      type: object
+      required: [id, slug, title]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        title: { type: string }
+        excerpt: { type: string, nullable: true }
+        cover_image_url: { type: string, nullable: true }
+        published_at: { type: string, format: date-time, nullable: true }
+        author:
+          type: object
+          properties:
+            name: { type: string, nullable: true }
+            avatar_url: { type: string, nullable: true }
+    PostDetail:
+      allOf:
+        - $ref: '#/components/schemas/Post'
+        - type: object
+          properties:
+            content_html: { type: string, nullable: true }
+            tags:
+              type: array
+              items: { $ref: '#/components/schemas/Tag' }
+    PaginatedPosts:
+      type: object
+      properties:
+        total: { type: integer }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Post' }
+
+    # ── Contact
+    Address:
+      type: object
+      properties:
+        address_html: { type: string, nullable: true }
+        map_embed_url: { type: string, nullable: true }
+    ContactSettings:
+      type: object
+      properties:
+        emails:
+          type: array
+          items: { type: string }
+        phones:
+          type: array
+          items: { type: string }
+        address: { $ref: '#/components/schemas/Address' }
+        socials: { $ref: '#/components/schemas/SocialLinks' }
+    ContactMessageCreate:
+      type: object
+      required: [name, email, message]
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string, nullable: true }
+        subject: { type: string, nullable: true }
+        message: { type: string }
+        consent: { type: boolean, nullable: true }
+        recaptcha_token: { type: string, nullable: true }
+        honeypot: { type: string, nullable: true }
+    ContactMessageResult:
+      type: object
+      properties:
+        id: { type: integer }
+        status: { type: string, example: 'received' }
+
+    # ── About (mövcud)
+    AboutItem:
+      type: object
+      required: [id, experience, project_count, members]
+      properties:
+        id: { type: integer }
+        locale: { type: string, nullable: true }
+        experience: { type: integer }
+        project_count: { type: integer }
+        members: { type: integer }
+        intro_html: { type: string, nullable: true }
+        hero_image_url: { type: string, nullable: true }
+        strategy_title: { type: string, nullable: true }
+        strategy_description: { type: string, nullable: true }
+        created_at: { type: string, format: date-time, nullable: true }
+        updated_at: { type: string, format: date-time, nullable: true }
+openapi: 3.1.0
+info:
+  title: SDA Website Content API – About + Nav/Services/Projects/News/Contact (v1.1)
+  version: 1.1.0
+  description: |
+    Front-end-in tam dinamik işləməsi üçün lazım olan endpoint-lərin yekun OpenAPI 3.1 təsviri.
+    Bu sənəd **About**, **Navigation (Header/Footer + Language)**, **Services**, **Projects**, **News** və **Contact form** bölmələrini əhatə edir.
+servers:
+  - url: http://153.92.223.91:8000
+    description: Production (Swagger UI: /docs)
+  - url: http://localhost:8000
+    description: Development
+
+paths:
+  # ───────────────────────────────── Navigation / Languages ─────────────────────────────
+  /api/v1/navigation:
+    get:
+      tags: [Navigation]
+      summary: Header & Footer menyuları, sosial linklər və dil siyahısı
+      parameters:
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NavigationPayload' }
+              examples:
+                default:
+                  value:
+                    header:
+                      items:
+                        - label: "About us"
+                          href: "/about/about.html"
+                        - label: "Services"
+                          children:
+                            - label: "Property development consulting"
+                              href: "/services inner page/servicesinner.html"
+                            - label: "Property leasing & sales"
+                              href: "/services inner page/servicesinner.html"
+                            - label: "Market research & analytics"
+                              href: "/services inner page/servicesinner.html"
+                        - label: "Projects"
+                          href: "/projects/projects.html"
+                        - label: "Properties"
+                          children:
+                            - label: "Shopping malls"
+                              href: "/property inner page/sectorinner.html"
+                            - label: "Residential buildings"
+                              href: "/property inner page/sectorinner.html"
+                            - label: "Commercial buildings"
+                              href: "/property inner page/sectorinner.html"
+                        - label: "News"
+                          href: "/news/news.html"
+                    footer:
+                      columns:
+                        - title: "Company"
+                          items:
+                            - { label: "About us", href: "/about/about.html" }
+                            - { label: "Career", href: "/join our team/joinour.html" }
+                            - { label: "Blog", href: "/news page/news.html" }
+                            - { label: "Contacts", href: "/contacts/contacts.html" }
+                            - { label: "Privacy Policy", href: "/privacy policy/privacy.html" }
+                        - title: "Property types"
+                          items:
+                            - { label: "Shopping malls", href: "/property inner page/sectorinner.html" }
+                            - { label: "Residential buildings", href: "/property inner page/sectorinner.html" }
+                            - { label: "Multifunctional buildings", href: "/property inner page/sectorinner.html" }
+                            - { label: "Retail & Commercial buildings", href: "/property inner page/sectorinner.html" }
+                            - { label: "Office buildings", href: "/property inner page/sectorinner.html" }
+                        - title: "Services"
+                          items:
+                            - { label: "Property development consulting", href: "/Services/services.html" }
+                            - { label: "Property leasing & sales", href: "/Services/services.html" }
+                            - { label: "Market research & analytics", href: "/services inner page/servicesinner.html" }
+                            - { label: "Property marketing strategy", href: "/services inner page/servicesinner.html" }
+                    socials:
+                      instagram: "https://instagram.com/yourpage"
+                      facebook: "https://facebook.com/yourpage"
+                      linkedin: "https://linkedin.com/company/yourpage"
+                    languages:
+                      - { code: "EN", label: "English", is_default: true }
+                      - { code: "AZ", label: "Azerbaijani" }
+                      - { code: "RU", label: "Russian" }
+
+  /api/v1/locales:
+    get:
+      tags: [Navigation]
+      summary: Dəstəklənən dillər
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Locale' }
+
+  # ───────────────────────────────── Services ──────────────────────────────────────────
+  /api/v1/services:
+    get:
+      tags: [Services]
+      summary: Xidmət siyahısı (sayfalanmış)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: category
+          in: query
+          schema: { type: string, nullable: true }
+        - name: sort
+          in: query
+          schema: { type: string, enum: [created_desc, created_asc, title_asc, title_desc], default: created_desc }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaginatedServices' }
+  /api/v1/services/{slug}:
+    get:
+      tags: [Services]
+      summary: Xidmət detalları
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ServiceDetail' } } } }
+        '404': { description: Tapılmadı }
+
+  # ───────────────────────────────── Projects ─────────────────────────────────────────
+  /api/v1/projects:
+    get:
+      tags: [Projects]
+      summary: Layihə siyahısı (sayfalanmış)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: property_type
+          in: query
+          schema: { type: string, nullable: true, description: 'məs: mall, residential, commercial, office' }
+        - name: status
+          in: query
+          schema: { type: string, nullable: true, description: 'məs: ongoing, completed, planned' }
+        - name: sort
+          in: query
+          schema: { type: string, enum: [created_desc, created_asc, title_asc, title_desc, start_desc, start_asc], default: created_desc }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaginatedProjects' }
+  /api/v1/projects/{slug}:
+    get:
+      tags: [Projects]
+      summary: Layihə detalları
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ProjectDetail' } } } }
+        '404': { description: Tapılmadı }
+
+  # ───────────────────────────────── News / Blog ──────────────────────────────────────
+  /api/v1/posts:
+    get:
+      tags: [News]
+      summary: Xəbər / Bloq yazıları siyahısı
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: sort
+          in: query
+          schema: { type: string, enum: [published_desc, published_asc, title_asc, title_desc], default: published_desc }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/PaginatedPosts' } } } }
+  /api/v1/posts/{slug}:
+    get:
+      tags: [News]
+      summary: Xəbər / Bloq yazısı detalları
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/PostDetail' } } } }
+        '404': { description: Tapılmadı }
+
+  # ───────────────────────────────── Contact ──────────────────────────────────────────
+  /api/v1/contact/settings:
+    get:
+      tags: [Contact]
+      summary: Əlaqə məlumatları (address, email, phone, map və s.)
+      parameters:
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ContactSettings' } } } }
+  /api/v1/contact/messages:
+    post:
+      tags: [Contact]
+      summary: Əlaqə formu göndərişi
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ContactMessageCreate' }
+            examples:
+              default:
+                value:
+                  name: "John Doe"
+                  email: "john@example.com"
+                  phone: "+994501234567"
+                  subject: "Partnership"
+                  message: "We would like to become a partner."
+                  consent: true
+                  recaptcha_token: "<token>"
+      responses:
+        '201':
+          description: Yaradıldı
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContactMessageResult' }
+        '400': { description: Yanlış sorğu }
+
+  # ───────────────────────────────── About (mövcud) ───────────────────────────────────
+  /api/v1/about:
+    get:
+      tags: [About]
+      summary: About elementləri (istatistik, intro, hero və s.)
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/AboutItem' }
+
+components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+    offset:
+      name: offset
+      in: query
+      schema: { type: integer, minimum: 0, default: 0 }
+    locale:
+      name: locale
+      in: query
+      description: Məsələn EN, AZ, RU
+      schema: { type: string, nullable: true }
+    q:
+      name: q
+      in: query
+      description: Axtarış sözü
+      schema: { type: string, nullable: true }
+
+  schemas:
+    # ── Navigation
+    Locale:
+      type: object
+      required: [code, label]
+      properties:
+        code: { type: string }
+        label: { type: string }
+        is_default: { type: boolean, nullable: true }
+    MenuItem:
+      type: object
+      required: [label]
+      properties:
+        label: { type: string }
+        href: { type: string, nullable: true }
+        external: { type: boolean, nullable: true }
+        children:
+          type: array
+          items: { $ref: '#/components/schemas/MenuItem' }
+    Menu:
+      type: object
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/MenuItem' }
+        columns:
+          type: array
+          items:
+            type: object
+            properties:
+              title: { type: string }
+              items:
+                type: array
+                items: { $ref: '#/components/schemas/MenuItem' }
+    SocialLinks:
+      type: object
+      additionalProperties: true
+      properties:
+        instagram: { type: string, nullable: true }
+        facebook: { type: string, nullable: true }
+        linkedin: { type: string, nullable: true }
+        twitter: { type: string, nullable: true }
+    NavigationPayload:
+      type: object
+      properties:
+        header: { $ref: '#/components/schemas/Menu' }
+        footer: { $ref: '#/components/schemas/Menu' }
+        languages:
+          type: array
+          items: { $ref: '#/components/schemas/Locale' }
+        socials: { $ref: '#/components/schemas/SocialLinks' }
+
+    # ── Shared / Media
+    ImageAsset:
+      type: object
+      properties:
+        url: { type: string }
+        alt: { type: string, nullable: true }
+        width: { type: integer, nullable: true }
+        height: { type: integer, nullable: true }
+    Tag:
+      type: object
+      properties:
+        slug: { type: string }
+        title: { type: string }
+    Category:
+      type: object
+      properties:
+        slug: { type: string }
+        title: { type: string }
+
+    # ── Services
+    Service:
+      type: object
+      required: [id, slug, title]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        title: { type: string }
+        excerpt: { type: string, nullable: true }
+        cover_image_url: { type: string, nullable: true }
+        category: { $ref: '#/components/schemas/Category' }
+        is_featured: { type: boolean, nullable: true }
+        created_at: { type: string, format: date-time, nullable: true }
+    ServiceDetail:
+      allOf:
+        - $ref: '#/components/schemas/Service'
+        - type: object
+          properties:
+            content_html: { type: string, nullable: true }
+            gallery:
+              type: array
+              items: { $ref: '#/components/schemas/ImageAsset' }
+    PaginatedServices:
+      type: object
+      properties:
+        total: { type: integer }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Service' }
+
+    # ── Projects
+    Project:
+      type: object
+      required: [id, slug, title]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        title: { type: string }
+        summary: { type: string, nullable: true }
+        cover_image_url: { type: string, nullable: true }
+        property_type: { type: string, nullable: true }
+        location: { type: string, nullable: true }
+        status: { type: string, nullable: true }
+        start_date: { type: string, format: date, nullable: true }
+        end_date: { type: string, format: date, nullable: true }
+        created_at: { type: string, format: date-time, nullable: true }
+    ProjectDetail:
+      allOf:
+        - $ref: '#/components/schemas/Project'
+        - type: object
+          properties:
+            description_html: { type: string, nullable: true }
+            metrics:
+              type: object
+              additionalProperties: true
+              description: "Məs: area_m2, floors, cost, client və s."
+            gallery:
+              type: array
+              items: { $ref: '#/components/schemas/ImageAsset' }
+    PaginatedProjects:
+      type: object
+      properties:
+        total: { type: integer }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+
+    # ── News / Blog
+    Post:
+      type: object
+      required: [id, slug, title]
+      properties:
+        id: { type: integer }
+        slug: { type: string }
+        title: { type: string }
+        excerpt: { type: string, nullable: true }
+        cover_image_url: { type: string, nullable: true }
+        published_at: { type: string, format: date-time, nullable: true }
+        author:
+          type: object
+          properties:
+            name: { type: string, nullable: true }
+            avatar_url: { type: string, nullable: true }
+    PostDetail:
+      allOf:
+        - $ref: '#/components/schemas/Post'
+        - type: object
+          properties:
+            content_html: { type: string, nullable: true }
+            tags:
+              type: array
+              items: { $ref: '#/components/schemas/Tag' }
+    PaginatedPosts:
+      type: object
+      properties:
+        total: { type: integer }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Post' }
+
+    # ── Contact
+    Address:
+      type: object
+      properties:
+        address_html: { type: string, nullable: true }
+        map_embed_url: { type: string, nullable: true }
+    ContactSettings:
+      type: object
+      properties:
+        emails:
+          type: array
+          items: { type: string }
+        phones:
+          type: array
+          items: { type: string }
+        address: { $ref: '#/components/schemas/Address' }
+        socials: { $ref: '#/components/schemas/SocialLinks' }
+    ContactMessageCreate:
+      type: object
+      required: [name, email, message]
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string, nullable: true }
+        subject: { type: string, nullable: true }
+        message: { type: string }
+        consent: { type: boolean, nullable: true }
+        recaptcha_token: { type: string, nullable: true }
+        honeypot: { type: string, nullable: true }
+    ContactMessageResult:
+      type: object
+      properties:
+        id: { type: integer }
+        status: { type: string, example: 'received' }
+
+    # ── About (mövcud)
+    AboutItem:
+      type: object
+      required: [id, experience, project_count, members]
+      properties:
+        id: { type: integer }
+        locale: { type: string, nullable: true }
+        experience: { type: integer }
+        project_count: { type: integer }
+        members: { type: integer }
+        intro_html: { type: string, nullable: true }
+        hero_image_url: { type: string, nullable: true }
+        strategy_title: { type: string, nullable: true }
+        strategy_description: { type: string, nullable: true }
+        created_at: { type: string, format: date-time, nullable: true }
+        updated_at: { type: string, format: date-time, nullable: true }

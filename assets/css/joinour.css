@@ -913,20 +913,25 @@ margin-top: -6rem;
     justify-content: space-between;
     padding-top: 2rem 56px 0 56px;
     font-size: 0.9rem;
+    margin: 0 auto;
+    max-width: 1440px;
     color: var(--Interface-Stroke, #D0DDDD);
-    margin-right: 3rem;
 }
 
 .footer-bottom p {
     margin-left: 2.9rem;
 }
 
-.footer-bottom a {
+.footer-bottom p a {
     color: inherit;      
     border-bottom: 1px solid white;
     text-decoration: none;
+    margin-left: 0px;
 }
 
+.ff {
+  margin-right: 50px;
+}
 
 @media (max-width: 1024px) {
   .footer-content {
@@ -1249,6 +1254,10 @@ margin-top: -6rem;
     width: 72%;
     margin-left: 0px;
   }
+
+  .container9 {
+    margin-left: -20px;
+  }
 }
 
 
@@ -1275,7 +1284,7 @@ margin-top: -6rem;
 
   .left-section h1 {
     font-size: 28px;
-  }
+  } 
 }
 
 

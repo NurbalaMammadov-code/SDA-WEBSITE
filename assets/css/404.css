@@ -797,19 +797,26 @@ margin-top: -6rem;
     display: flex;
     justify-content: space-between;
     padding-top: 2rem 56px 0 56px;
+    margin: 0 auto;
+    max-width: 1440px;
     font-size: 0.9rem;
     color: var(--Interface-Stroke, #D0DDDD);
-    margin-right: 3rem;
+   
 }
 
 .footer-bottom p {
     margin-left: 2.9rem;
 }
 
-.footer-bottom a {
+.footer-bottom  p a {
     color: inherit;      
     border-bottom: 1px solid white;
     text-decoration: none;
+    margin-left: 0px;
+}
+
+.ff {
+  margin-right: 50px;
 }
 
 
@@ -934,3 +941,10 @@ margin-top: -6rem;
     margin: 0;
   }
 }
+
+@media (min-width:1078px) and (max-width:1439px){
+
+    .footer-links {
+        margin-right: 200px;
+    }
+  }
