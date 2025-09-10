@@ -75,6 +75,11 @@ h1, h2 {
             background: transparent;
         }
 
+           
+.logo .logo-about { display: none; }
+
+.navbar.on-about .logo .logo-default { display: none; }
+.navbar.on-about .logo .logo-about   { display: block; }
 
         .nav-center {
             position: absolute;

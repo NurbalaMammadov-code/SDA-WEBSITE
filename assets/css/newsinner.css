@@ -845,7 +845,7 @@ h1 {
   overflow: hidden;
   position: relative;
   background: white;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; 
 }
 
 .card-image img {
@@ -868,7 +868,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  background-color: var(--Interface-bg-02, #E7F2F3);  
+  background-color: #BCE4F0;  
   color: var(--Primary-Base, #00B2BA);             
   padding: 0.3rem 0.8rem;     
   border-radius: 9999px;      
@@ -884,7 +884,7 @@ h1 {
     display: flex;
   align-items: center;
   gap: 0.25rem;
-  background-color: var(--Interface-bg-02, #E7F2F3);
+  background-color: #F3E8D5;
   color: var(--Primary-Base, #00B2BA);               
   padding: 0.3rem 0.8rem;      
   border-radius: 9999px;       
@@ -902,7 +902,7 @@ h1 {
     display: flex;
   align-items: center;
   gap: 0.25rem;
-  background-color: var(--Interface-bg-02, #E7F2F3); 
+  background-color: #DAECDE; 
   color: var(--Primary-Base, #00B2BA);              
   padding: 0.3rem 0.8rem;       
   border-radius: 9999px;       
