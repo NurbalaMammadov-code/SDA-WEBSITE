@@ -1399,6 +1399,7 @@ h1, h2 {
     font-style: normal;
     margin-bottom: 4px;
     color: var(--Text-Dark, #002425);
+    margin-left: 10px;
 }
 
 .member-title1 {
@@ -1406,6 +1407,7 @@ h1, h2 {
     font-size: 16px;
     color: var(--Text-Medium, #455E5F);
     font-weight: 400;
+    margin-left: 10px;
 }
 
 
@@ -1447,15 +1449,28 @@ h1, h2 {
 }
 /* Modal Styles */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 50px;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+   display: none;
+  position: fixed;
+  inset: 0; /* top/left/right/bottom = 0 */
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;  /* navbar > 1999 */
+}
+
+.modal:target {
+  display: block;
+}
+
+/* Modal açıkken navbar'ı gizle */
+body:has(.modal:target) .navbar-wrapper {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Modal açıkken scroll kilidi */
+html:has(.modal:target),
+body:has(.modal:target) {
+  overflow: hidden;
 }
 
 .modal-content {
@@ -1501,6 +1516,22 @@ h1, h2 {
     transition: background-color 0.3s ease;
 }
 
+
+.modal-open .navbar-wrapper {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+.modal-open .modal {
+  top: 0;
+}
+
+
+.modal {
+  z-index: 9999; 
+}
 
 
 .modal-body {
@@ -1571,6 +1602,7 @@ h1, h2 {
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .connect-button:hover {
@@ -2321,3 +2353,24 @@ margin-top: -6rem;
     }
     
 }
+
+
+
+
+
+
+/* Başlangıçta gizlenecek kartlar için */
+.is-hidden { display: none !important; }
+
+/* Tek buton yerleşimi (senin mevcut .load-more-btn stilinle uyumlu) */
+.loadmore-control { 
+    display: flex; 
+    justify-content: center; 
+    margin-top: -80px;
+    
+}
+
+/* Ok dönüş animasyonu */
+.load-more-btn .btn-icon { transition: transform .3s ease; }
+.load-more-btn.rotated .btn-icon { transform: rotate(180deg); }
+

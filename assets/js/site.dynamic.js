@@ -29,8 +29,7 @@ const el = (tag, attrs = {}, children = []) => {
 };
 const qs = (s) => document.querySelector(s);
 
-// Sayfadaki sınıf adları About/Home’da farklı olabiliyor.
-// Eğer .dropdown-menu1/.dropdown-item1 varsa onları kullan, yoksa klasik sınıflar:
+
 const MENU_CLASS = document.querySelector('.dropdown-menu1') ? 'dropdown-menu1' : 'dropdown-menu';
 const ITEM_CLASS = MENU_CLASS === 'dropdown-menu1' ? 'dropdown-item1' : 'dropdown-item';
 
@@ -101,8 +100,7 @@ function renderFooter(footer, socials) {
     });
   }
 
-  // Sosyal linkler (ikonlarınız sabitse mevcut SVG’leri korumak isteyebilirsiniz;
-  // burada basit link basıyoruz)
+ 
   const socialWrap = qs('.social-links2');
   if (socialWrap && socials) {
     const add = (href, text) => {
@@ -136,7 +134,7 @@ function renderLanguages(list) {
         e.preventDefault();
         setStoredLocale(code);
         applyLocale(code);
-        location.reload(); // istersen reload kaldırıp kendi yeniden-çek akışını kurabilirsin
+        location.reload(); 
       });
       container.append(a);
     });

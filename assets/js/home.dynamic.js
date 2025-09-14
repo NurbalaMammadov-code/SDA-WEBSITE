@@ -1,4 +1,4 @@
-// /assets/js/home.dynamic.js (tam sürüm)
+
 import { listServices } from '/assets/js/servicesApi.js';
 import { listProjects } from '/assets/js/projectsApi.js';
 import { listNewsPosts } from '/assets/js/newsApi.js';
@@ -9,7 +9,7 @@ import { toAbsolute, formatDate } from '/assets/js/apiClient.js';
 
 const q = (sel) => document.querySelector(sel);
 
-// ───────────────────────── Hero ─────────────────────────
+
 async function renderHero() {
   const heroRoot = q('.hero-section');
   if (!heroRoot) return;
@@ -42,7 +42,7 @@ async function renderHero() {
   }
 }
 
-// ───────────────────── About Teaser ────────────────────
+
 async function renderAboutTeaser() {
   const aboutRoot = q('#about');
   if (!aboutRoot) return;
@@ -53,7 +53,7 @@ async function renderAboutTeaser() {
   const ctaEl   = aboutRoot.querySelector('.discover-button');
 
   try {
-    // 1) Əgər homepage endpoint varsa onu istifadə et
+    
     const hp = await getHomepage().catch(() => null);
     if (hp && hp.about_teaser) {
       const a = hp.about_teaser;
@@ -77,17 +77,17 @@ async function renderAboutTeaser() {
   }
 }
 
-// ───────────────────── Services (4 kart) ───────────────
+
 async function renderHomeServices() {
   const wrap = q('.services-cards');
   if (!wrap) return;
 
   try {
-    // Mümkünsə seçilmişləri backend verə bilər → /homepage.featured_services
+   
     let items = null;
     const hp = await getHomepage().catch(() => null);
     if (hp && Array.isArray(hp.featured_services) && hp.featured_services.length) {
-      // hp.featured_services já Service obyektləridirsə birbaşa al; deyil, slug listəsidirsə ayrıca fetch lazımdır.
+     
       items = hp.featured_services;
     }
 
@@ -129,7 +129,7 @@ async function renderPropertySectors() {
 
   try {
     const sectors = await listPropertySectors({ limit: 10, sort: 'order_asc' }).catch(() => null);
-    if (!sectors || !sectors.length) return; // backend yoxdursa, statik mətinlər qalsın
+    if (!sectors || !sectors.length) return; 
 
     box.innerHTML = sectors.map(sec => `
       <div class="accordion-item">
@@ -157,7 +157,7 @@ async function renderPropertySectors() {
   }
 }
 
-// ───────────────────── Projects (kartlar) ──────────────
+
 async function renderHomeProjects() {
   const grid = q('.insights-grid1');
   if (!grid) return;
@@ -186,7 +186,7 @@ async function renderHomeProjects() {
   }
 }
 
-// ───────────────────── News (3 kart) ───────────────────
+
 async function renderHomeNews() {
   const grid = q('.insights-grid');
   if (!grid) return;
@@ -222,7 +222,7 @@ async function renderHomeNews() {
   }
 }
 
-// ───────────────────── Init ─────────────────────────────
+
 async function init() {
   try {
     await Promise.all([

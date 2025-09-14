@@ -1,57 +1,37 @@
 // /assets/js/services.dynamic.js
-import { listServices as apiListServices } from '/assets/js/servicesApi.js';
-import { request } from '/assets/js/apiClient.js';
+import { listServices, listWorkProcesses } from "/assets/js/servicesApi.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 
-// --- API yardımcıları ---
-function toQuery(params = {}) {
-  const q = new URLSearchParams();
-  Object.entries(params).forEach(([k, v]) => {
-    if (v === undefined || v === null || v === '') return;
-    q.set(k, v);
-  });
-  const s = q.toString();
-  return s ? `?${s}` : '';
+// Grid'i esnek bul (class/id uyuşmazlığı olmasın)
+function getServicesGrid() {
+  return (
+    document.querySelector(".services-section .cards-grid") ||
+    document.querySelector(".services-section .services-grid") ||
+    document.querySelector(".cards-grid") ||
+    document.getElementById("servicesGrid")
+  );
 }
 
-// Services: servicesApi.js varsa onu kullanıyoruz
-async function listServices({ skip = 0, limit = 12, order_by = 'order', direction = 'asc' } = {}) {
-  try {
-    return await apiListServices({ skip, limit, order_by, direction });
-  } catch (e) {
-    // apiClient yoksa doğrudan fetch fallback'i:
-    const url = `/api/v1/services${toQuery({ skip, limit, order_by, direction })}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Services list failed: ${res.status}`);
-    return res.json();
+// API'den gelen cevabı diziye normalize et
+function toArray(payload) {
+  if (Array.isArray(payload)) return payload;
+  return payload?.items || payload?.results || payload?.data || payload?.rows || [];
+}
+
+function renderServices(servicesRaw) {
+  const grid = getServicesGrid();
+  if (!grid) {
+    console.warn("[services] Grid bulunamadı (class/id eşleşmiyor).");
+    return;
   }
-}
 
-// Work processes
-async function listWorkProcesses({ skip = 0, limit = 10 } = {}) {
-  // apiClient.request ile; yoksa fetch’e düşer
-  try {
-    return await request('/api/v1/work-processes', { params: { skip, limit } });
-  } catch {
-    const url = `/api/v1/work-processes${toQuery({ skip, limit })}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Work processes list failed: ${res.status}`);
-    return res.json();
-  }
-}
-
-// --- Render ---
-function renderServices(services) {
-  const grid = $('.services-section .cards-grid');
-  if (!grid) return;
-
-  const items = [...(services || [])]
-    .map(s => ({
-      id: s.id,
-      name: s.name ?? s.title ?? '',                  // isim eşleştirme
-      description: s.description ?? s.short_description ?? '',
-      order: s.order ?? 0,
+  const items = toArray(servicesRaw)
+    .map((s) => ({
+      id: s.id ?? s.slug ?? s.uuid ?? "",
+      name: s.name ?? s.title ?? s.service_name ?? "",
+      description: s.description ?? s.short_description ?? s.excerpt ?? "",
+      order: Number(s.order ?? s.sort ?? 0),
     }))
     .sort((a, b) => a.order - b.order);
 
@@ -60,29 +40,41 @@ function renderServices(services) {
     return;
   }
 
-  grid.innerHTML = items.map((s, i) => `
-    <div class="service-card" data-id="${s.id || ''}">
-      <div class="card-number">/${String(i + 1).padStart(2, '0')}/</div>
-      <h3 class="card-title">${s.name}</h3>
-      <p class="card-description">${s.description}</p>
-    </div>
-  `).join('');
+  grid.innerHTML = items
+    .map(
+      (s, i) => `
+      <div class="service-card" data-id="${s.id}">
+        <div class="card-number">/${String(i + 1).padStart(2, "0")}/</div>
+        <h3 class="card-title">${s.name}</h3>
+        <p class="card-description">${s.description}</p>
+      </div>`
+    )
+    .join("");
 
-  // kart tıklama -> inner sayfa
-  grid.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const id = card.getAttribute('data-id');
-      if (id) window.location.href = `/services inner page/servicesinner.html?id=${id}`;
+  // Kart tıklama → detay
+  grid.querySelectorAll(".service-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const id = card.getAttribute("data-id");
+      if (!id) return;
+      // klasör adında boşluk varsa tarayıcı %20'ye çevirir ama en temizi klasörü boşluksuz adlandırmaktır
+      window.location.href = `/services inner page/servicesinner.html?id=${encodeURIComponent(id)}`;
+      // tercihen: /services-inner/servicesinner.html?id=...
     });
   });
 }
 
-function renderWorkProcesses(processes) {
-  const cont = $('.work-process-section .steps-container');
+function renderWorkProcesses(processesRaw) {
+  const cont =
+    document.querySelector(".work-process-section .steps-container") ||
+    document.querySelector(".steps-container");
   if (!cont) return;
 
-  const items = [...(processes || [])]
-    .map(p => ({ title: p.title ?? '', description: p.description ?? '', order: p.order ?? 0 }))
+  const items = toArray(processesRaw)
+    .map((p) => ({
+      title: p.title ?? p.name ?? "",
+      description: p.description ?? p.detail ?? "",
+      order: Number(p.order ?? p.sort ?? 0),
+    }))
     .sort((a, b) => a.order - b.order)
     .slice(0, 6);
 
@@ -91,34 +83,40 @@ function renderWorkProcesses(processes) {
     return;
   }
 
-  cont.innerHTML = items.map((p, idx) => `
-    <div class="step">
-      <div class="step-indicator">
-        <div class="step-dot"></div>
-        ${idx < items.length - 1 ? '<div class="step-line"></div>' : ''}
-      </div>
-      <div class="step-content">
-        <h3 class="step-title">${p.title}</h3>
-        <p class="step-description">${p.description}</p>
-      </div>
-    </div>
-  `).join('');
+  cont.innerHTML = items
+    .map(
+      (p, idx) => `
+      <div class="step">
+        <div class="step-indicator">
+          <div class="step-dot"></div>
+          ${idx < items.length - 1 ? '<div class="step-line"></div>' : ""}
+        </div>
+        <div class="step-content">
+          <h3 class="step-title">${p.title}</h3>
+          <p class="step-description">${p.description}</p>
+        </div>
+      </div>`
+    )
+    .join("");
 }
 
-// --- Boot ---
 async function boot() {
   try {
+    console.time("services:fetch");
     const [services, processes] = await Promise.all([
-      listServices({ limit: 12, order_by: 'order', direction: 'asc' }),
+      // order_by/direction backend’de farklı isimli olabilir; sorun değil, yoksa yok sayılır
+      listServices({ limit: 12, order_by: "order", direction: "asc" }),
       listWorkProcesses({ limit: 10 }),
     ]);
+    console.timeEnd("services:fetch");
+    console.debug("[services] payload:", services);
     renderServices(services);
     renderWorkProcesses(processes);
   } catch (e) {
-    console.warn('[services.dynamic] error:', e);
-    const grid = $('.services-section .cards-grid');
+    console.warn("[services.dynamic] error:", e);
+    const grid = getServicesGrid();
     if (grid) grid.innerHTML = `<div style="color:#c33">Services yüklenemedi.</div>`;
   }
 }
 
-document.addEventListener('DOMContentLoaded', boot);
+document.addEventListener("DOMContentLoaded", boot);
