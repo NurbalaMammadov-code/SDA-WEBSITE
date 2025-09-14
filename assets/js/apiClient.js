@@ -1,6 +1,6 @@
 
 export const API_CONFIG = {
-  BASE: 'http://153.92.223.91:8000', 
+  BASE: 'https//sdaconsulting.az', 
   PREFIX: '/api/v1',                  
   DEFAULT_LOCALE: null,              
   TIMEOUT_MS: 10000,
