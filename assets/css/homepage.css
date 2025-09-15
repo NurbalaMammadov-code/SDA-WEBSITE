@@ -181,7 +181,7 @@ h1, h2 {
             margin-top: 0.5rem;
             overflow: hidden;
         }
-
+ 
         .dropdown-menu1.active {
             opacity: 1;
             visibility: visible;
@@ -207,14 +207,17 @@ h1, h2 {
 
        .dropdown-item1 {
             display: block;
-            padding: 16px 16px;
-            color: #002425;
-            text-decoration: none;
-            font-size: 18px;
-            font-style: normal;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            transition: all 0.2s ease;
+    padding: 0.75rem 1rem;
+    color: var(--Text-Dark, #002425);
+    text-decoration: none;
+    font-size: 18px;
+    font-style: normal;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
         }
 
         .dropdown-item1:hover {

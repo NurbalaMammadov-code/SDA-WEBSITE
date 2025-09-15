@@ -1411,7 +1411,10 @@ h1, h2 {
 }
 
 
-
+.loadmore-control {
+  margin: 0 auto;
+  margin-top: 30px;
+}
 
 
 .load-more-btn {
@@ -1422,12 +1425,11 @@ h1, h2 {
     padding: 12px 24px;
     font-size: 18px;
     font-style: normal;
-    font-family: 'montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
-    align-items: center;
     gap: 8px;
 }
 
@@ -1608,6 +1610,13 @@ body:has(.modal:target) {
 .connect-button:hover {
     background: #0f4547;
     transform: translateY(-2px);
+}
+
+.connect-button svg {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  flex-shrink: 0; 
 }
 
 /* Tablet Styles */
@@ -2358,19 +2367,4 @@ margin-top: -6rem;
 
 
 
-
-/* Başlangıçta gizlenecek kartlar için */
-.is-hidden { display: none !important; }
-
-/* Tek buton yerleşimi (senin mevcut .load-more-btn stilinle uyumlu) */
-.loadmore-control { 
-    display: flex; 
-    justify-content: center; 
-    margin-top: -80px;
-    
-}
-
-/* Ok dönüş animasyonu */
-.load-more-btn .btn-icon { transition: transform .3s ease; }
-.load-more-btn.rotated .btn-icon { transform: rotate(180deg); }
 

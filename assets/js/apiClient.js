@@ -1,16 +1,16 @@
 
 export const API_CONFIG = {
-  BASE: 'https//sdaconsulting.az', 
+  BASE: 'https://sdaconsulting.az', 
   PREFIX: '/api/v1',                  
   DEFAULT_LOCALE: null,              
   TIMEOUT_MS: 10000,
-};
+}; 
 
 
 const CDN_BASE = null;
 
 
-let AUTH_TOKEN = null;
+let AUTH_TOKEN = undefined;
 
 
 function trimRightSlash(s) { return String(s || '').replace(/\/+$/, ''); }
@@ -37,14 +37,18 @@ function resolvePath(path) {
 }
 
 
-function applyQuery(urlString, params) {
-  if (!params) return urlString;
-  const u = new URL(urlString);
-  Object.entries(params).forEach(([k, v]) => {
-    if (v !== undefined && v !== null && v !== '') u.searchParams.set(k, v);
-  });
+function applyQuery(uString, params) {
+  const u = new URL(uString, API_CONFIG.BASE);  // BASE kesin kullanılsın
+
+  if (params && typeof params === 'object') {
+    Object.entries(params).forEach(([k, v]) => {
+      if (v !== undefined && v !== null) u.searchParams.set(k, v);
+    });
+  }
   return u.toString();
 }
+
+
 
 
 export function setAuthToken(token) { AUTH_TOKEN = token || null; }
@@ -76,35 +80,23 @@ export async function request(path, { method = 'GET', params, body, headers = {}
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
-  try {
-    const res = await fetch(url, {
-      method,
-      headers: {
-        Accept: 'application/json',
-        ...(isJSON ? { 'Content-Type': 'application/json' } : {}),
-        ...(AUTH_TOKEN ? { Authorization: `Bearer ${AUTH_TOKEN}` } : {}),
-        ...headers,
-      },
-      body: body ? (isJSON ? JSON.stringify(body) : body) : undefined,
-    
-      signal: controller.signal,
-    });
+try {
+  // GET/HEAD istekleri için body ve Content-Type göndermemek için kontrol
+  const isGetLike = method === 'GET' || method === 'HEAD';
 
-    if (res.status === 204) return null;
-
-    if (!res.ok) {
-     
-      let msg = '';
-      try { msg = await res.text(); } catch {}
-      throw new Error(`API ${res.status} ${res.statusText} → ${msg}`);
-    }
-
-    const contentType = res.headers.get('content-type') || '';
-    if (contentType.includes('application/json')) {
-      return res.json();
-    }
-    return res.text();
-  } finally {
+  const res = await fetch(url, {
+    method,
+    headers: {
+      Accept: 'application/json',
+      ...(!isGetLike && isJSON ? { 'Content-Type': 'application/json' } : {}),
+      ...(AUTH_TOKEN ? { Authorization: `Bearer ${AUTH_TOKEN}` } : {}),
+      ...headers,
+    },
+    body: !isGetLike && body ? (isJSON ? JSON.stringify(body) : body) : undefined,
+    signal: controller.signal,
+  });
+}
+ finally {
     clearTimeout(timer);
   }
 }
@@ -124,3 +116,5 @@ export function formatDate(d) {
   const yy = dt.getFullYear();
   return `${dd}.${mm}.${yy}`;
 }
+
+
