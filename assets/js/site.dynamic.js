@@ -134,7 +134,7 @@ function renderLanguages(list) {
         e.preventDefault();
         setStoredLocale(code);
         applyLocale(code);
-        location.reload(); 
+        location.reload();  
       });
       container.append(a);
     });

@@ -58,19 +58,30 @@ async function renderTeam() {
   `).join('');
 }
 
-async function init() {
+async function initAll() {
   try {
+    // Site ve About API’lerini paralel başlat
     await Promise.all([
-      renderAboutStats(),
-      renderPartners(),
-      renderTeam(),
+      initSite(),           // site.dynamic.js
+      (async () => {        // about.dynamic.js
+        const aboutList = await listAbout({ limit: 1 });
+        const about = (aboutList && aboutList[0]) || null;
+
+        if (about) {
+          renderAboutStats(about);
+          renderPartners();
+          renderTeam();
+          renderAboutIntroAndHero(about);
+        }
+      })()
     ]);
   } catch (e) {
-    console.error('about.dynamic error:', e);
+    console.error('initAll error:', e);
   }
 }
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', initAll);
+
 
 async function renderAboutIntroAndHero() {
   const introEl = document.querySelector('.intro-text');
