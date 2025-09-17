@@ -1,5 +1,5 @@
-// assets/js/news.dynamic.js
-import { listNewsPosts as listNews } from "/assets/js/newsApi.js";  // haber: bu dosya news.html'e göre /assets/js/ altında
+
+import { listNewsPosts as listNews } from "/assets/js/newsApi.js"; 
 
 function pickBadge(tags = []) {
   const t = (Array.isArray(tags) ? tags[0] : tags) || "News";
@@ -14,7 +14,7 @@ function cardHTML(item) {
   const date = (item.updated_at || item.created_at || "").slice(0,10);
   const { cls, label } = pickBadge(item.tags);
 
-  // Detay sayfasına id ile gidelim (ileride newsinner.js’de kullanırsın)
+
   const href = `/news inner page/newsinner.html?id=${item.id}`;
 
   return `
@@ -36,7 +36,7 @@ function cardHTML(item) {
 }
 
 async function renderNews() {
-  // #app içindeki mevcut iki grid’i bul
+ 
   const firstGrid = document.querySelector('#app .insights-grid:not(.extra-cards)');
   const moreGrid  = document.querySelector('#app .insights-grid.extra-cards');
 
@@ -44,11 +44,11 @@ async function renderNews() {
 
   firstGrid.innerHTML = "";
   moreGrid.innerHTML  = "";
-  moreGrid.classList.add("hidden"); // başlangıçta gizli kalsın
+  moreGrid.classList.add("hidden"); 
 
   let items = [];
   try {
-    items = await listNews({ limit: 12 });   // Swagger: array<NewsRead>
+    items = await listNews({ limit: 12 });  
   } catch (e) {
     firstGrid.innerHTML = `<p style="padding:1rem;color:red">News yüklenemedi: ${e.message}</p>`;
     return;

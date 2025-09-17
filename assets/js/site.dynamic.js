@@ -1,16 +1,18 @@
 // /assets/js/site.dynamic.js
 import { API_CONFIG } from '/assets/js/apiClient.js';
-import { getNavigation, listLocales } from '/assets/js/siteApi.js';
+import { getNavigation, listLocales, NAV_PATH } from '/assets/js/siteApi.js';
 
 
 const IS_PROD = /sdaconsulting\.az$/i.test(location.hostname);
 
 
-const DEV_LANGS = [
+const HAS_NAV_API = !!NAV_PATH;  // 
+const DEFAULT_LANGS = [
   { code: 'EN', label: 'English' },
   { code: 'AZ', label: 'Azerbaijani' },
   { code: 'RU', label: 'Russian' },
 ];
+
 
 
 // ── Locale helpers ─────────────────────────────────────────
@@ -161,10 +163,10 @@ async function initSite() {
 
 
 
-  if (!IS_PROD) {
+  if (!IS_PROD || !HAS_NAV_API) {
     try {
       
-      renderLanguages(DEV_LANGS);
+       renderLanguages(DEFAULT_LANGS);
     } catch {}
    
     return;

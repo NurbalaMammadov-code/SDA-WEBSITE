@@ -5,12 +5,16 @@ function meta(name, dflt) {
   return (el && el.content && el.content.trim()) || dflt;
 }
 
-const NAV_PATH    = meta('api-path-navigation', '/api/v1/navigation');
-const LOCALES_PATH= meta('api-path-locales', '/api/v1/locales');
+ export const NAV_PATH     = meta('api-path-navigation', null);
+ export const LOCALES_PATH = meta('api-path-locales', null);
 
 export const getNavigation = (params = {}) => {
-  const locale = (params.locale ?? API_CONFIG.DEFAULT_LOCALE ?? 'EN').toUpperCase();
-  return request(NAV_PATH, { params: { ...params, locale } });
+ if (!NAV_PATH) return Promise.resolve(null);            // API yoksa çağrı yapma
+ const locale = (params.locale ?? API_CONFIG.DEFAULT_LOCALE ?? 'EN').toUpperCase();
+ return request(NAV_PATH, { params: { ...params, locale } });
 };
 
-export const listLocales = () => request(LOCALES_PATH);
+export const listLocales = (params = {}) => {
+  if (!LOCALES_PATH) return Promise.resolve([]);   
+  return request(LOCALES_PATH, { params });
+};
