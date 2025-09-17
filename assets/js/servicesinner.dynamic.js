@@ -17,7 +17,7 @@ function toAbsolute(url){
   if (!url) return '';
   try { return new URL(url, location.origin).href; } catch { return url; }
 }
-
+ 
 const els = {
   title:    $('#service-title'),
   desc:     $('#service-description'),

@@ -7,6 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/servicesinner.css">
     <link rel="icon" type="image/x-icon" href="/assets/images/SDA logo.ico">
+<meta name="api-base" content="https://sdaconsulting.az">
+<meta name="api-path-navigation" content="/api/v1/navigation">
+<meta name="api-path-locales" content="/api/v1/locales">
+<meta name="api-path-services" content="/api/v1/services">
 </head>
 <body>
   
@@ -14,13 +18,13 @@
      <nav class="navbar">
         <div class="nav-container">
             <div class="ellipse ellipse-right"></div>
-            <a href="/homepage/project/homepage.html" class="logo"> 
+            <a href="/" class="logo"> 
                 <img src="/assets/images/SDA 1.png" alt="SDA Logo">
             </a> 
 
             <ul class="nav-center">
                 <li class="nav-item">
-                    <a href="/about/about.html" class="nav-link">About us</a>
+                    <a href="/about" class="nav-link">About us</a>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" onclick="toggleDropdown('services')">
@@ -30,13 +34,13 @@
                         </svg>
                     </button>
                     <div class="dropdown-menu" id="services-dropdown">
-                       <a href="/services inner page/servicesinner.html" class="dropdown-item">Property development consulting</a>
-                        <a href="/services inner page/servicesinner.html" class="dropdown-item">Property leasing & sales</a>
-                        <a href="/services inner page/servicesinner.html" class="dropdown-item">Market research & analytics</a>
+                       <a href="/services-inner" class="dropdown-item">Property development consulting</a>
+                        <a href="/services-inner" class="dropdown-item">Property leasing & sales</a>
+                        <a href="/services-inner" class="dropdown-item">Market research & analytics</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="/project bolumu/project/index.html" class="nav-link">Projects</a>
+                    <a href="/projects" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" onclick="toggleDropdown('property')">
@@ -46,13 +50,13 @@
                         </svg>
                     </button>
                     <div class="dropdown-menu" id="property-dropdown">
-                         <a href="/property inner page/sectorinner.html" class="dropdown-item">Shopping malls</a>
-                        <a href="/property inner page/sectorinner.html" class="dropdown-item">Residential buildings</a>
-                        <a href="/property inner page/sectorinner.html" class="dropdown-item">Commercial buildings</a>
+                         <a href="/sectors" class="dropdown-item">Shopping malls</a>
+                        <a href="/sectors" class="dropdown-item">Residential buildings</a>
+                        <a href="/sectors" class="dropdown-item">Commercial buildings</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="/news page/news.html" class="nav-link">News</a>
+                    <a href="/news" class="nav-link">News</a>
                 </li>
             </ul>
 
@@ -69,7 +73,7 @@
                         <a href="#" class="dropdown-item" onclick="setLanguage('RU')">RU</a>
                     </div>
                 </div>
-                <a href="/contacts/contacts.html"><button class="contact-btn">Contact Us</button></a>
+                <a href="/contacts"><button class="contact-btn">Contact Us</button></a>
             </div>
 
             <div class="mobile-controls">
@@ -98,7 +102,7 @@
         <div class="mobile-menu" id="mobile-menu">
             <div class="mobile-menu-content">
                 <div class="mobile-nav-item">
-                    <a href="/about/about.html" class="mobile-nav-link">About us</a>
+                    <a href="/about" class="mobile-nav-link">About us</a>
                 </div>
                 <div class="mobile-nav-item">
                     <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown('mobile-services')">
@@ -108,9 +112,9 @@
                         </svg>
                     </button>
                     <div class="mobile-dropdown-content" id="mobile-services-dropdown">
-                         <a href="/services inner page/servicesinner.html" class="mobile-dropdown-item">Property development consulting</a>
-                        <a href="/services inner page/servicesinner.html" class="mobile-dropdown-item">Property leasing & sales</a>
-                        <a href="/services inner page/servicesinner.html" class="mobile-dropdown-item">Market research & analytics</a>
+                         <a href="/services-inner" class="mobile-dropdown-item">Property development consulting</a>
+                        <a href="/services-inner" class="mobile-dropdown-item">Property leasing & sales</a>
+                        <a href="/services-inner" class="mobile-dropdown-item">Market research & analytics</a>
                     </div>
                 </div>
                 <div class="mobile-nav-item">
@@ -124,16 +128,16 @@
                         </svg>
                     </button>
                     <div class="mobile-dropdown-content" id="mobile-property-dropdown">
-                       <a href="/property inner page/sectorinner.html" class="mobile-dropdown-item">Shopping malls</a>
-                        <a href="/property inner page/sectorinner.html" class="mobile-dropdown-item">Residential buildings</a>
-                        <a href="/property inner page/sectorinner.html" class="mobile-dropdown-item">Commercial buildings</a>
+                       <a href="/sectors" class="mobile-dropdown-item">Shopping malls</a>
+                        <a href="/sectors" class="mobile-dropdown-item">Residential buildings</a>
+                        <a href="/sectors" class="mobile-dropdown-item">Commercial buildings</a>
                     </div>
                 </div>
                 <div class="mobile-nav-item">
-                    <a href="/news/news.html" class="mobile-nav-link">News</a>
+                    <a href="/news" class="mobile-nav-link">News</a>
                 </div>
                  <div class="mobile-nav-item">
-                    <button class="contact-btn" onclick="window.location.href='/contacts/contacts.html'">Contact Us</button>
+                    <button class="contact-btn" onclick="window.location.href='/contacts'">Contact Us</button>
                 </div>
             </div>
         </div>
@@ -147,7 +151,7 @@
             <div class="hero-text">
                 <h1 id="service-title">Property development consulting</h1>
                 <p id="service-description">From site evaluation to project delivery, we provide data-driven guidance to help investors and developers unlock full property potential.</p>
-                <a href="/contacts/contacts.html"><button class="cta-button">Get a consultation</button></a>
+                <a href="/contacts"><button class="cta-button">Get a consultation</button></a>
             </div>
             <div class="hero-image">
                 <img  id="service-hero-image" src="/assets/images/image 6.png" alt="Modern property development" />
@@ -340,12 +344,12 @@
         <div class="projects-container">
             <div class="project-card">
                 <div class="project-image">
-                    <a href="/projectinnerpage/projectinner.html"><img src="/assets/images/image 1-2.png" alt="Podium Mall"></a>
+                    <a href="/project-inner"><img src="/assets/images/image 1-2.png" alt="Podium Mall"></a>
                 </div>
                 <div class="project-info">
-                    <a href="/projectinnerpage/projectinner.html" class="project-title"> Podium Mall </a>
+                    <a href="/project-inner" class="project-title"> Podium Mall </a>
                     <div class="project-arrow">
-                        <a href="/projectinnerpage/projectinner.html">
+                        <a href="/project-inner">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                             <path d="M22.6666 9.3335L9.33325 22.6668M22.6666 9.3335H10.6666M22.6666 9.3335V21.3335" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -356,12 +360,12 @@
             
             <div class="project-card">
                 <div class="project-image">
-                    <a href="/projectinnerpage/projectinner.html"><img src="/assets/images/image 1-2.png" alt="Podium Mall"></a>
+                    <a href="/project-inner"><img src="/assets/images/image 1-2.png" alt="Podium Mall"></a>
                 </div>
                 <div class="project-info">
-                    <a href="/projectinnerpage/projectinner.html" class="project-title"> Podium Mall </a>
+                    <a href="/project-inner" class="project-title"> Podium Mall </a>
                     <div class="project-arrow">
-                        <a href="/projectinnerpage/projectinner.html">
+                        <a href="/project-inner">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                             <path d="M22.6666 9.3335L9.33325 22.6668M22.6666 9.3335H10.6666M22.6666 9.3335V21.3335" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -389,7 +393,7 @@
 
                 <h1 class="title19">Let's build <span class="highlight"> strong </span> <br> future together</h1>
 
-                <a href="/contacts/contacts.html" class="cta-button">
+                <a href="/contacts" class="cta-button">
                     <span>Get in touch</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 25" fill="none">
                         <path d="M17 7.31543L7 17.3154M17 7.31543H8M17 7.31543V16.3154" stroke="#F3FBFC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -407,7 +411,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <a href="/homepage/project/homepage.html"><img src="/assets/images/SDAlogo.png" alt="SDA Logo" class="logo-image"></a>
+                        <a href="/"><img src="/assets/images/SDAlogo.png" alt="SDA Logo" class="logo-image"></a>
                     </div>
                     <div class="social-links2">
                         <a href="#" class="social-link">
@@ -432,32 +436,32 @@
                     <div class="footer-column1">
                         <h4>Company</h4>
                         <ul>
-                            <li><a href="/about/about.html">About us</a></li>
-                            <li><a href="/join our team/joinour.html">Career</a></li>
-                            <li><a href="/news page/news.html">Blog</a></li>
-                            <li><a href="/contacts/contacts.html">Contacts</a></li>
-                            <li><a href="/privacy policy/privacy.html">Privacy Policy</a></li>
+                            <li><a href="/about">About us</a></li>
+                            <li><a href="/careers">Career</a></li>
+                            <li><a href="/news">Blog</a></li>
+                            <li><a href="/contacts">Contacts</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-column">
                         <h4>Property types</h4>
                         <ul>
-                            <li><a href="/property inner page/sectorinner.html">Shopping malls</a></li>
-                            <li><a href="/property inner page/sectorinner.html">Residential buildings</a></li>
-                            <li><a href="/property inner page/sectorinner.html">Multifunctional buildings</a></li>
-                            <li><a href="/property inner page/sectorinner.html">Retail & Commercial buildings</a></li>
-                            <li><a href="/property inner page/sectorinner.html">Office buildings</a></li>
+                            <li><a href="/sectors">Shopping malls</a></li>
+                            <li><a href="/sectors">Residential buildings</a></li>
+                            <li><a href="/sectors">Multifunctional buildings</a></li>
+                            <li><a href="/sectors">Retail & Commercial buildings</a></li>
+                            <li><a href="/sectors">Office buildings</a></li>
                         </ul>
                     </div>
 
                     <div class="footer-column">
                         <h4>Services</h4>
                         <ul>
-                            <li><a href="/Services/services.html">Property development consulting</a></li>
-                            <li><a href="/Services/services.html">Property leasing & sales</a></li>
-                            <li><a href="/services inner page/servicesinner.html">Market research & analytics</a></li>
-                            <li><a href="/services inner page/servicesinner.html">Property marketing strategy</a></li>
+                            <li><a href="/services">Property development consulting</a></li>
+                            <li><a href="/services">Property leasing & sales</a></li>
+                            <li><a href="/services-inner">Market research & analytics</a></li>
+                            <li><a href="/services-inner">Property marketing strategy</a></li>
                         </ul>
                     </div>
                 </div>

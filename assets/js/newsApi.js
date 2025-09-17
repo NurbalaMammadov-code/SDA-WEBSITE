@@ -19,3 +19,4 @@ export const getNewsPost = (slugOrId, params = {}) => {
 
 export const listRelatedPosts = (params = {}) =>
   request('/news/related', { params }); 
+

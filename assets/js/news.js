@@ -96,38 +96,36 @@ let activeDropdown = null;
         });
 
 
-//load more
-
- document.addEventListener("DOMContentLoaded", function () {
-    const extraCards = document.querySelector(".extra-cards");
-    const loadMoreBtn = document.querySelector(".load-more-btn");
-
-    let isExpanded = false;
 
 
+// load more (güvenli)
+document.addEventListener("DOMContentLoaded", function () {
+  const extraCards  = document.querySelector(".extra-cards");
+  const loadMoreBtn = document.querySelector(".load-more-btn");
 
+  if (!loadMoreBtn) return; // buton yoksa sessiz çık
+
+  let isExpanded = false;
 
   loadMoreBtn.addEventListener("click", function () {
-      if (!isExpanded) {
-        // Açmadan önce scroll pozisyonunu kaydet
-        previousScroll = window.scrollY;
+   
+    if (!extraCards) {
+      
+      return;
+    }
 
-        extraCards.classList.remove("hidden");
-        loadMoreBtn.innerHTML = 'Load less <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M8 15V1M8 1L14 7M8 1L2 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </svg>';
-      } else {
-        // Kapat, sonra scroll pozisyonunu geri getir
-        extraCards.classList.add("hidden");
-        loadMoreBtn.innerHTML = 'Load more <svg width="16" height="16" viewBox="0 0 16 16" fill="none"> <path d="M8 15V1M8 15L14 9M8 15L2 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </svg>';
+    if (!isExpanded) {
+      extraCards.classList.remove("hidden");
+      loadMoreBtn.innerHTML = 'Load less <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    } else {
+      extraCards.classList.add("hidden");
+      loadMoreBtn.innerHTML = 'Load more <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
 
-        // Küçük bir gecikmeyle scroll konumunu geri getir 
-        setTimeout(() => {
-          window.scrollTo({ top: previousScroll, behavior: 'auto' });
-        }, 10);
-      }
-
-      isExpanded = !isExpanded;
-    });
+    isExpanded = !isExpanded;
   });
+});
+
 
 
 

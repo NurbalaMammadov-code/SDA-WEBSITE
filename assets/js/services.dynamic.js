@@ -11,7 +11,7 @@ function getServicesGrid() {
     document.querySelector(".cards-grid") ||
     document.getElementById("servicesGrid")
   );
-}
+} 
 
 // API'den gelen cevabı diziye normalize et
 function toArray(payload) {

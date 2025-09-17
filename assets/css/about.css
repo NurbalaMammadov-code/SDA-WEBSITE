@@ -1453,9 +1453,9 @@ h1, h2 {
 .modal {
    display: none;
   position: fixed;
-  inset: 0; /* top/left/right/bottom = 0 */
+  inset: 0; 
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 9999;  /* navbar > 1999 */
+  z-index: 9999; 
 }
 
 .modal:target {
@@ -1474,6 +1474,8 @@ html:has(.modal:target),
 body:has(.modal:target) {
   overflow: hidden;
 }
+
+.team-grid .is-hidden { display: none !important; }
 
 .modal-content {
     position: relative;

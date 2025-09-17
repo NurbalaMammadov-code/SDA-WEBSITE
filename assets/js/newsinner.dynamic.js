@@ -20,7 +20,7 @@ const els = {
     facebook: document.querySelector('.social-btn.facebook'),
     linkedin: document.querySelector('.social-btn.linkedin'),
   }
-};
+}; 
 
 // Basit yardımcılar
 const prefer = (...vals) => vals.find(v => v !== undefined && v !== null && v !== '') ?? '';

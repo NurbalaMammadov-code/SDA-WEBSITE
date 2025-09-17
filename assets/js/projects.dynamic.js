@@ -1,5 +1,5 @@
 
-import { listProjects, listPropertySectors, getProject } from '/assets/js/projectsApi.js';
+import { listProjects, listSectors, getProject } from '/assets/js/projectsApi.js';
 import { toAbsolute, getQuery } from '/assets/js/apiClient.js';
 
 console.log('projects.dynamic LOADED v3');

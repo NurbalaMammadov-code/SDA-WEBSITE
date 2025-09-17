@@ -7,6 +7,10 @@ import { getHomepage } from '/assets/js/homeApi.js';
 import { listPropertySectors } from '/assets/js/propertySectorsApi.js';
 import { toAbsolute, formatDate } from '/assets/js/apiClient.js';
 
+
+const IS_PROD = /sdaconsulting\.az$/i.test(location.hostname);
+
+
 const q = (sel) => document.querySelector(sel);
 
 
@@ -158,6 +162,9 @@ async function renderPropertySectors() {
 }
 
 
+  
+
+
 async function renderHomeProjects() {
   const grid = q('.insights-grid1');
   if (!grid) return;
@@ -185,6 +192,12 @@ async function renderHomeProjects() {
     console.error('home.projects error:', e);
   }
 }
+
+
+
+
+
+
 
 
 async function renderHomeNews() {

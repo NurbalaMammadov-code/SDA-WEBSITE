@@ -2,6 +2,17 @@
 import { API_CONFIG } from '/assets/js/apiClient.js';
 import { getNavigation, listLocales } from '/assets/js/siteApi.js';
 
+
+const IS_PROD = /sdaconsulting\.az$/i.test(location.hostname);
+
+
+const DEV_LANGS = [
+  { code: 'EN', label: 'English' },
+  { code: 'AZ', label: 'Azerbaijani' },
+  { code: 'RU', label: 'Russian' },
+];
+
+
 // ── Locale helpers ─────────────────────────────────────────
 const LS_LOCALE_KEY = 'locale';
 const getStoredLocale = () => localStorage.getItem(LS_LOCALE_KEY) || 'EN';
@@ -124,7 +135,7 @@ function renderLanguages(list) {
     { code: 'EN', label: 'English' },
     { code: 'AZ', label: 'Azerbaijani' },
     { code: 'RU', label: 'Russian' },
-  ];
+  ]; 
   const build = (container) => {
     if (!container) return;
     container.innerHTML = '';
@@ -147,6 +158,17 @@ function renderLanguages(list) {
 async function initSite() {
   const code = getStoredLocale();
   applyLocale(code);
+
+
+
+  if (!IS_PROD) {
+    try {
+      
+      renderLanguages(DEV_LANGS);
+    } catch {}
+   
+    return;
+  }
 
   try {
     const nav = await getNavigation({});

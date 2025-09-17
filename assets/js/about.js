@@ -231,55 +231,65 @@ function closeModal() {
 
 
 
+// TEAM: Load more 
 document.addEventListener('DOMContentLoaded', function () {
-  const grid = document.querySelector('.team-grid');
-  if (!grid) return;
+  const grid = document.querySelector('.team-grid');       
+  const btn  = document.getElementById('team-load-btn');
+  if (!grid || !btn) return;
 
-  const cards = Array.from(grid.children);         
-  const btn   = document.getElementById('team-load-btn');
-  const txt   = btn?.querySelector('.btn-text');
+  const txt  = btn.querySelector('.btn-text');
+  const IS_PROD = /sdaconsulting\.az$/i.test(location.hostname);
+  const CAP  = 12;     
+  let visible = 4;     
 
-  const STEP = 4;
-  const CAP  = 12;                                
-  const MAX  = Math.min(cards.length, CAP);
+  const getCards = () => Array.from(grid.querySelectorAll('.team-member'));
 
-  
-  let visible = Math.min(4, MAX);
-  cards.forEach((card, i) => {
-    card.classList.toggle('is-hidden', i >= visible);
-  });
+  function applyVisibility() {
+    const cards = getCards();
+    const MAX = Math.min(cards.length, CAP);
+
+   
+    if (!IS_PROD && cards.length === 0) {
+      btn.style.display = '';
+      if (txt) txt.textContent = 'Load more';
+      btn.setAttribute('aria-expanded', 'false');
+      return;
+    }
+
+    
+    btn.style.display = (MAX <= 4) ? 'none' : '';
+
+   
+    if (visible > MAX) visible = MAX;
+
+    
+    cards.forEach((card, i) => card.classList.toggle('is-hidden', i >= visible));
+
+    const expanded = (visible >= MAX);  
+    if (txt) txt.textContent = expanded ? 'Load less' : 'Load more';
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  }
 
  
-  if (MAX <= 4 && btn) {
-    btn.style.display = 'none';
-    return;
-  }
+  const mo = new MutationObserver(applyVisibility);
+  mo.observe(grid, { childList: true });
+
+ 
+  applyVisibility();
 
   
   btn.addEventListener('click', () => {
-    if (visible < MAX) {
-      
-      const next = Math.min(visible + STEP, MAX);
-      for (let i = visible; i < next; i++) {
-        cards[i]?.classList.remove('is-hidden');
-      }
-      visible = next;
+    const cards = getCards();
+    const MAX = Math.min(cards.length, CAP);
+    if (MAX <= 4 && IS_PROD) return; 
 
-     
-      if (visible >= MAX) {
-        txt.textContent = 'Load less';
-        btn.setAttribute('aria-expanded', 'true');
-        btn.classList.add('rotated');
-      }
-    } else {
-     
-      for (let i = 4; i < MAX; i++) {
-        cards[i]?.classList.add('is-hidden');
-      }
-      visible = 4;
-      txt.textContent = 'Load more';
-      btn.setAttribute('aria-expanded', 'false');
-      btn.classList.remove('rotated');
-    }
+    visible = (visible < MAX) ? MAX : 4; 
+    applyVisibility();
   });
+
+  
+  document.addEventListener('team:rendered', applyVisibility);
 });
+
+
+

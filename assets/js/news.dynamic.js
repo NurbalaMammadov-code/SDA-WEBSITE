@@ -1,5 +1,5 @@
 // assets/js/news.dynamic.js
-import { listNews } from "assets/js/newsApi.js";  // haber: bu dosya news.html'e göre /assets/js/ altında
+import { listNewsPosts as listNews } from "/assets/js/newsApi.js";  // haber: bu dosya news.html'e göre /assets/js/ altında
 
 function pickBadge(tags = []) {
   const t = (Array.isArray(tags) ? tags[0] : tags) || "News";

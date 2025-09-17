@@ -13,7 +13,7 @@ export const getProject = (slugOrId, params = {}) => {
     ? `/api/v1/projects/id/${encodeURIComponent(s)}`
     : `/api/v1/projects/${encodeURIComponent(s)}`;
   return request(path, { params });
-};
+}; 
 
 // Sektör (tek) + Sektör listesi (fallback için)
 export const getSector = (id) =>
