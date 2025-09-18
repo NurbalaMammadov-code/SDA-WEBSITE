@@ -7,7 +7,7 @@ const IS_PROD = /sdaconsulting\.az$/i.test(location.hostname);
 
 
 const HAS_NAV_API = !!NAV_PATH;  // 
-const DEFAULT_LANGS = [
+const DEFAULT_LANGS = [ 
   { code: 'EN', label: 'English' },
   { code: 'AZ', label: 'Azerbaijani' },
   { code: 'RU', label: 'Russian' },

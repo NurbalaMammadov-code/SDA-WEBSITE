@@ -68,7 +68,7 @@ async function renderAboutTeaser() {
       return;
     }
 
-    // 2) Fallback: /about?limit=1
+    // 2) Fallback: 
     const aboutList = await listAbout({ limit: 1 }).catch(() => []);
     const about = aboutList && aboutList[0];
     if (about) {
@@ -193,19 +193,14 @@ async function renderHomeProjects() {
   }
 }
 
-
-
-
-
-
-
-
 async function renderHomeNews() {
   const grid = q('.insights-grid');
   if (!grid) return;
   try {
-    const data = await listNewsPosts({ limit: 3, sort: 'published_desc' });
-    const items = (data && (data.items || data)) || [];
+      const hp = await getHomepage().catch(()=>null);
+   let items = (hp && Array.isArray(hp.featured_posts) && hp.featured_posts.length)
+ ? hp.featured_posts
+ : ((await listNewsPosts({ limit:3, sort:'published_desc' }).catch(()=>null))?.items || []);
     grid.innerHTML = items.map(n => {
       const href = `/news inner page/newsinner.html?slug=${encodeURIComponent(n.slug)}`;
       const img  = n.cover_image_url ? toAbsolute(n.cover_image_url) : '/assets/images/image 4.png';

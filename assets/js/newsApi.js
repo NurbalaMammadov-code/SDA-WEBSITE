@@ -1,9 +1,10 @@
 
 import { request } from '/assets/js/apiClient.js';
 
-// Liste (News / Blog)
-export const listNewsPosts = (params = {}) =>
-  request('/news', { params });
+
+ const meta = (n,d=null)=>document.querySelector(`meta[name="${n}"]`)?.content?.trim()||d;
+ const NEWS_LIST_PATH = meta('api-path-news', '/api/v1/posts');
+ export const listNewsPosts = (params = {}) => request(NEWS_LIST_PATH, { params });
 
 
 
