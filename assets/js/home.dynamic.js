@@ -96,18 +96,19 @@ async function renderHomeServices() {
     }
 
     if (!items) {
-      const data = await listServices({ limit: 4, is_featured: true }).catch(() => null);
+      const data = await listServices({ limit: 4, order_by: 'order', direction: 'asc' }).catch(() => null);
+
       items = (data && (data.items || data)) || [];
     }
 
     wrap.innerHTML = (items || []).map((s, i) => {
-      const href = `/services inner page/servicesinner.html?slug=${encodeURIComponent(s.slug)}`;
+      const href = `/services inner page/servicesinner.html?id=${encodeURIComponent(s.id)}`;
       return `
         <a href="${href}">
           <div class="service-card">
             <div class="card-number">/${String(i + 1).padStart(2, '0')}/</div>
-            <h3 class="card-title">${s.title ?? ''}</h3>
-            <p class="card-description">${s.excerpt ?? ''}</p>
+           <h3 class="card-title">${s.name ?? ''}</h3>
+<p class="card-description">${(s.description ?? '').toString().slice(0,140)}</p>
           </div>
         </a>
       `;
@@ -193,40 +194,30 @@ async function renderHomeProjects() {
   }
 }
 
+
 async function renderHomeNews() {
   const grid = q('.insights-grid');
   if (!grid) return;
   try {
-      const hp = await getHomepage().catch(()=>null);
-   let items = (hp && Array.isArray(hp.featured_posts) && hp.featured_posts.length)
- ? hp.featured_posts
- : ((await listNewsPosts({ limit:3, sort:'published_desc' }).catch(()=>null))?.items || []);
-    grid.innerHTML = items.map(n => {
-      const href = `/news inner page/newsinner.html?slug=${encodeURIComponent(n.slug)}`;
-      const img  = n.cover_image_url ? toAbsolute(n.cover_image_url) : '/assets/images/image 4.png';
-      const date = n.published_at ? formatDate(n.published_at) : '';
+    
+    const newsArr = await listNewsPosts({ skip: 0, limit: 3 }).catch(() => []);
+    const items = Array.isArray(newsArr) ? newsArr.slice(0,3) : [];
+
+    grid.innerHTML = items.map(post => {
+      const img = toAbsolute(post.photo_url || '');
+      const date = (post.created_at || '').slice(0,10);
+      
+      const href = `/news-inner/?id=${encodeURIComponent(post.id)}`;
       return `
-        <div class="insight-card">
-          <div class="card-image">
-            <a href="${href}"><img src="${img}" alt="${n.title ?? ''}"></a>
+        <a href="${href}" class="insight">
+          <div class="insight-image" style="background-image:url('${img}')"></div>
+          <div class="insight-content-wrap">
+            <h3 class="insight-title">${post.title ?? ''}</h3>
+            <div class="insight-date">${date}</div>
           </div>
-          <div class="card-meta">
-            <span class="card-category1"><span class="ara"> News </span></span>
-            <span class="card-date">${date}</span>
-          </div>
-          <h3 class="card-title">
-            <a href="${href}" class="card-title-link">${n.title ?? ''}</a>
-          </h3>
-          <a href="${href}" class="read-more-link">Read more
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 25" fill="none">
-              <path d="M17 7.90765L7 17.9077M17 7.90765H8M17 7.90765V16.9077" stroke="#00B2BA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      `;
+        </a>`;
     }).join('');
   } catch (e) {
-    console.error('home.news error:', e);
   }
 }
 

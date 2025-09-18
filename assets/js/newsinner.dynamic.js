@@ -1,4 +1,4 @@
-// /assets/js/newsinner.dynamic.js
+
 import { getNewsPost, listNewsPosts, listRelatedPosts } from '/assets/js/newsApi.js';
 import { getQuery, formatDate, toAbsolute } from '/assets/js/apiClient.js';
 
@@ -6,13 +6,13 @@ const qs  = (s) => document.querySelector(s);
 const slug = getQuery('slug', null);
 const id   = getQuery('id',   null);
 
-// Sayfadaki hedef elemanlar
+
 const els = {
   tag:    document.getElementById('news-tag'),
   title:  document.getElementById('news-title'),
   date:   document.getElementById('news-date'),
   img:    document.getElementById('news-main-image'),
-  // Görseller üst blokta (#news-sections) kalır; metin gövdesini .article-content’e yazacağız
+ 
   body:   document.querySelector('.article-content'),
   relatedGrid: document.querySelector('#app .insights-grid') || document.getElementById('app'),
   share: {
@@ -22,13 +22,13 @@ const els = {
   }
 }; 
 
-// Basit yardımcılar
+
 const prefer = (...vals) => vals.find(v => v !== undefined && v !== null && v !== '') ?? '';
-const postHref = (p) => {
-  if (p?.slug) return `/news inner page/newsinner.html?slug=${encodeURIComponent(p.slug)}`;
-  if (p?.id   != null) return `/news inner page/newsinner.html?id=${p.id}`;
-  return '/news page/news.html';
-};
+ const postHref = (p) => {
+   if (p?.id   != null) return `/news inner page/newsinner.html?id=${p.id}`;
+   if (p?.slug) return `/news inner page/newsinner.html?slug=${encodeURIComponent(p.slug)}`;
+   return '/news page/news.html';
+ };
 
 function attachShareHandlers(titleText) {
   const url = location.href;
@@ -87,17 +87,20 @@ function renderBodyFromSections(sections) {
 async function renderRelated(current) {
   if (!els.relatedGrid) return;
 
-  // Önce related endpoint’ini dene
+  
   let rel = null;
   try {
     rel = await listRelatedPosts({ slug: current.slug, limit: 6 });
-  } catch { /* endpoint yoksa düşer */ }
+  } catch { }
 
-  // Fallback: son yazılardan, mevcut yazıyı çıkar
+ 
   if (!Array.isArray(rel) || !rel.length) {
-    const data = await listNewsPosts({ limit: 9, sort: 'published_desc' }).catch(() => null);
-    const items = (data && (data.items || data)) || [];
-    rel = items.filter(p => (current.slug ? p.slug !== current.slug : p.id !== current.id)).slice(0, 6);
+  const data = await listNewsPosts({ limit: 9 }).catch(() => null);
+const items = Array.isArray(data) ? data : [];
+ rel = items
+   .filter(p => (current.id != null ? p.id !== current.id : true))
+  .sort((a,b)=> new Date(b.created_at || b.updated_at || 0) - new Date(a.created_at || a.updated_at || 0))
+   .slice(0, 6);
   }
 
   els.relatedGrid.innerHTML = rel.map(n => {
@@ -126,13 +129,13 @@ async function renderRelated(current) {
 }
 
 async function load() {
-  const key = slug || id;
+  const key = id || slug ;
   if (!key) { console.warn('news key yok (slug veya id bekleniyor)'); return; }
 
-  // Haberi getir
+  
   const post = await getNewsPost(key);
 
-  // Üst kısım
+  
   const tag  = (post.tags && post.tags[0]) || 'News';
   const date = prefer(post.published_at, post.created_at, post.updated_at);
   const img  = prefer(post.cover_image_url, post.photo_url);
